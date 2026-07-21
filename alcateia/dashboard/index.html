@@ -175,6 +175,26 @@
                     </div>
                 </div>
 
+                <!-- CARD 3: VIBE DA PISTA (SOUNDCLOUD + EMBEDDINGS) -->
+                <div class="glass-card section-card" id="soundcloud-card" style="display: none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎧</span>
+                        <div class="card-header-text">
+                            <h3>3. Vibe da Pista (IA Acústica)</h3>
+                            <p class="card-subtitle">Análise semântica via OpenAI Embeddings para curadoria musical</p>
+                        </div>
+                    </div>
+                    <div class="soundcloud-container" style="padding: 15px;">
+                        <button class="toggle-btn active" style="width: 100%; justify-content: center;" onclick="recommendTrack()">
+                            Gerar Trilha via Embeddings
+                        </button>
+                        <div id="soundcloud-player" style="margin-top: 15px; border-radius: 8px; overflow: hidden;">
+                            <!-- Iframe do SoundCloud injetado via JS -->
+                        </div>
+                        <p id="embeddings-status" style="font-size: 0.8rem; margin-top: 10px; color: var(--text-muted); font-family: monospace;"></p>
+                    </div>
+                </div>
+
             </div>
 
             <!-- COLUNA DIREITA: RASTREABILIDADE E AUDITORIA -->
