@@ -1,0 +1,6 @@
+registro_id,pessoa_ou_papel,tipo_contribuicao,artefato_ou_etapa,periodo,forma_reconhecimento,autorizacao_publica,status,observacao
+MDN-RPP01-AUT-0001,responsavel_do_projeto,idealizacao_e_decisao,MDN-RPP01,2026-07-16_em_diante,autoria_principal,pendente,pendente,nome a confirmar antes da circulação
+MDN-RPP01-AUT-0002,operador_de_coleta,coleta_e_logs,G1,a_definir,contribuicao_tecnica,pendente,pendente,pessoa a definir
+MDN-RPP01-AUT-0003,revisor_humano,validacao,G2_a_G4,a_definir,revisao_metodologica,pendente,pendente,pessoa a definir
+MDN-RPP01-AUT-0004,revisor_independente,dupla_revisao_e_gate_publico,G4,a_definir,revisao_independente,pendente,pendente,obrigatorio para circulação
+

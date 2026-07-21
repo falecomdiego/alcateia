@@ -1,0 +1,4 @@
+grupo_id,uso_publico_autorizado,decisao_humana_id,justificativa,responsavel,data
+GRP-001,sim,MDN-RPP01-DEC-0018,Dados agregados de sentimentos e dinâmicas noturnas sanitizados sem PII,Diego da Silva,2026-07-21
+GRP-002,sim,MDN-RPP01-DEC-0018,Métricas agregadas de frequência por evento/clube sem identificação individual,Diego da Silva,2026-07-21
+GRP-003,sim,MDN-RPP01-DEC-0018,Tópicos de infraestrutura e segurança com supressão de células n < 5,Diego da Silva,2026-07-21

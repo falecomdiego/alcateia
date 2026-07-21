@@ -1,0 +1,6 @@
+registro_id,pessoa_ou_papel,tipo_contribuicao,artefato_ou_etapa,periodo,forma_reconhecimento,autorizacao_publica,status,observacao
+MDN-RPP01-AUT-0001,Diego da Silva,idealizacao_e_decisao,MDN-RPP01,2026-07-16_em_diante,autoria_principal,pendente,confirmado_interno,identidade civil mantida em cadastro separado e circulação pública ainda não autorizada
+MDN-RPP01-AUT-0002,Diego da Silva,coleta_e_logs,G1,2026-07-20_em_diante,contribuicao_tecnica,pendente,confirmado_interno,Diego da Silva confirmado como operador técnico e de coleta
+MDN-RPP01-AUT-0003,Diego da Silva,revisao_metodologica_e_protecao,G0_a_G5,2026-07-20_em_diante,revisao_metodologica,pendente,confirmado_interno,Diego da Silva confirmado como responsável metodológico e encarregado de proteção de dados
+MDN-RPP01-AUT-0004,Kacia Oliveira,dupla_revisao_e_gate_publico,G4,2026-07-20_em_diante,revisao_independente,pendente,confirmado_interno,Kacia Oliveira com aceite direto registrado e disponível para revisão independente
+MDN-RPP01-AUT-0005,Diego da Silva,verificacao_e_liberacao_publica,G4,2026-07-20_em_diante,responsavel_publicacao,pendente,confirmado_interno,Diego da Silva confirmado como responsável pela publicação

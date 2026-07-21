@@ -1,0 +1,49 @@
+# Ambiente local
+.codex/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.env
+*.key
+*.secret
+
+# Rodada inicial: dados brutos e derivados que podem conter identificadores
+02_xlsx_brutos_extensao_chrome/
+03_lotes_processamento/
+04_bases_tratadas_por_lote/
+05_base_consolidada_parcial/
+06_bases_limpas_por_lote/
+07_classificacao_pilar2_por_lote/
+08_pln_pilar3_por_lote/
+09_matriz_resolutiva_por_lote/
+10_consolidacao_rodada_inicial/*.csv
+10_consolidacao_rodada_inicial/*.xlsx
+11_painel_final_rodada_inicial/*.csv
+11_painel_final_rodada_inicial/*.xlsx
+12_leitura_executiva_final/*.xlsx
+14_dashboard_visual_rodada_inicial/data/
+15_dashboard_publico_rodada_inicial/data/
+16_teste_agente_de_qualidade_fluxo_completo/*.xlsx
+17_teste_agentes_1_2_fluxo_completo/*.xlsx
+18_exemplos_praticos_evidencias_recorrentes/**/*.xlsx
+19_filtro_mencoes_van_muller/
+links.txt
+
+# MDN-RPP01: somente modelos e documentação podem ser versionados
+20_rodada_prospectiva_padronizada_01/02_dados_brutos_protegidos/dados/
+20_rodada_prospectiva_padronizada_01/00_governanca_e_protocolo/preenchidos/
+20_rodada_prospectiva_padronizada_01/03_processamento_por_lote/lotes/
+20_rodada_prospectiva_padronizada_01/03_processamento_por_lote/execucoes/
+20_rodada_prospectiva_padronizada_01/04_validacao_humana/preenchidos/
+20_rodada_prospectiva_padronizada_01/05_consolidacao_e_linhagem/saidas/
+20_rodada_prospectiva_padronizada_01/06_produto_interno/saidas/
+20_rodada_prospectiva_padronizada_01/07_publicacao_sanitizada/saidas/
+20_rodada_prospectiva_padronizada_01/07_publicacao_sanitizada/preenchidos/
+20_rodada_prospectiva_padronizada_01/08_pacote_reaplicacao/preenchidos/
+20_rodada_prospectiva_padronizada_01/01_fontes_e_coleta/preenchidos/
+
+# ALCATEIA outputs e executores locais
+alcateia/output/*
+!alcateia/output/.gitkeep
+

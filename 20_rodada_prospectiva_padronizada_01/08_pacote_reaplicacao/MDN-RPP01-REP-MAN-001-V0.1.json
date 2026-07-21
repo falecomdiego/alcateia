@@ -1,0 +1,27 @@
+{
+  "round_id": "MDN-RPP01",
+  "package_version": "0.1",
+  "pipeline_sha256": "d35c62ef775b0a3be8e4a8c2ca2c2df929e8a2987ade73e50266e706e8fcb760",
+  "validated_environment": {
+    "python": "3.14.6",
+    "git": "2.55.0.windows.3",
+    "tests_passed": 6
+  },
+  "status": "fixture_sintetica_sem_dados_reais",
+  "entrypoints": [
+    "python -m unittest discover -s pipeline_mdn_v2/tests -v",
+    "python -m pipeline_mdn_v2.mdn_pipeline.cli validate-config",
+    "python -m pipeline_mdn_v2.mdn_pipeline.cli verify-taxonomy"
+  ],
+  "fixture": {
+    "input": "pipeline_mdn_v2/tests/fixtures/sample_work.csv",
+    "expected": "pipeline_mdn_v2/tests/fixtures/expected_summary.json",
+    "contains_real_identifiers": false
+  },
+  "restrictions": [
+    "Não usar dados da rodada inicial.",
+    "Não alterar gates para executar a fixture unitária.",
+    "Não inserir segredos de pseudonimização em arquivos ou comandos registrados.",
+    "Não interpretar os comentários sintéticos como resultado do Mapa da Noite."
+  ]
+}

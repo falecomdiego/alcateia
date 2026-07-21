@@ -1,0 +1,10 @@
+{
+  "pipeline_version": "0.1.0",
+  "python_minimum": "3.11",
+  "external_python_dependencies": [],
+  "validated_on": {
+    "python": "3.14.6",
+    "operating_system": "Windows"
+  }
+}
+

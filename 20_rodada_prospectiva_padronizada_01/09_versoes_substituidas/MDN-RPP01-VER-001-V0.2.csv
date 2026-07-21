@@ -1,0 +1,18 @@
+artefato_id,arquivo,versao,data,status,substitui,alteracao_resumida,responsavel,hash_sha256
+MDN-RPP01-MAN-001,MDN-RPP01-MAN-001-V0.1.md,0.1,2026-07-16,rascunho,,Manifesto preventivo criado,responsavel_do_projeto,eebc2da8fe065e1467b2957f3fdad83228676860bc0b4463f39a70a28bc38105
+MDN-RPP01-GOV-001,MDN-RPP01-GOV-001-V0.1.md,0.1,2026-07-16,vigente,,Governança mínima e gates criados,responsavel_do_projeto,e6eb887bcde825561bac887ab1cf947f5f79204c84cdd9a5cd333ac37c36f772
+MDN-TAX-001,../../00_contexto_mestre/TAXONOMIA_MESTRE_MAPA_DA_NOITE_V1_1.md,1.1,2026-06-19,congelada_para_rodada,,Taxonomia oficial preservada,responsavel_do_projeto,9f6aa0a7e787e2886c061aa073df45c39820a4d83e12332ef3834d7bebca4097
+MDN-RPP01-RIS-001,../09_versoes_substituidas/MDN-RPP01-RIS-001-V0.1.csv,0.1,2026-07-16,substituida,,Matriz inicial de riscos preservada,responsavel_do_projeto,b9c8d239535f6dc555645c9963fe84645e543104cea3a0bcb30f674f0fdca60e
+MDN-RPP01-RIS-001,MDN-RPP01-RIS-001-V0.2.csv,0.2,2026-07-16,vigente,MDN-RPP01-RIS-001-V0.1,Incluídos riscos jurídicos técnicos e de circulação,Diego da Silva,73ef98c781f214c86a8d85d220a15af2ca834d95cb09b26c01b578b3cb842ce3
+MDN-RPP01-DEC-001,../09_versoes_substituidas/MDN-RPP01-DEC-001-V0.1.csv,0.1,2026-07-16,substituida,,Diário inicial preservado,responsavel_do_projeto,5a8bae216e0d5f5b90b66bfe064fd8956e8dc3cf52bf2be9e2fec491a3a9235f
+MDN-RPP01-DEC-001,MDN-RPP01-DEC-001-V0.2.csv,0.2,2026-07-16,vigente,MDN-RPP01-DEC-001-V0.1,Registrada aprovação da separação documental,Diego da Silva,ab8053d8b4137209c4a88134bea88053863a8173b289371a94dd7cdee2e408f6
+MDN-RPP01-AUT-001,../09_versoes_substituidas/MDN-RPP01-AUT-001-V0.1.csv,0.1,2026-07-16,substituida,,Controle inicial de autoria preservado,responsavel_do_projeto,b3c99579dd7b81fa4c396d742ae688dd1689bd97d20c6bf9287701c518010683
+MDN-RPP01-AUT-001,MDN-RPP01-AUT-001-V0.2.csv,0.2,2026-07-16,vigente,MDN-RPP01-AUT-001-V0.1,Autoria principal confirmada para uso interno,Diego da Silva,6e94cb15f37c25dafdbc08f9b3f02d4822e57c9a1a51d97ec929de6b34a4ae03
+MDN-RPP01-ACE-001,../09_versoes_substituidas/MDN-RPP01-ACE-001-V0.1.csv,0.1,2026-07-16,substituida,,Controle de acesso vazio preservado,responsavel_do_projeto,007d1637d57699df9c4551935b0eeefc5e77c091d81f7eddc53d64ea3e3e3ec4
+MDN-RPP01-ACE-001,MDN-RPP01-ACE-001-V0.2.csv,0.2,2026-07-16,vigente,MDN-RPP01-ACE-001-V0.1,Acesso inicial ao dossiê restrito registrado,Diego da Silva,0b218ee0425532ba438649958b226b4d113e93a606a0c5b5831ab5ec482aaa09
+MDN-RPP01-STATUS-001,../09_versoes_substituidas/MDN-RPP01-STATUS-001-V0.1.md,0.1,2026-07-16,substituida,,Status anterior à separação documental preservado,responsavel_do_projeto,3e924306cb07d1150942a5fe1fd9f3355bafd084a55e0e76aed43ffde4de809c
+MDN-RPP01-STATUS-001,MDN-RPP01-STATUS-001-V0.2.md,0.2,2026-07-16,vigente,MDN-RPP01-STATUS-001-V0.1,Status atualizado com proteção e comunicação separadas,Diego da Silva,ca1c77b56147d096b00e0a0bfbea9c3ba2879c15b4013afb7eb75bf67e4a915f
+MDN-RPP01-JUR-001,MDN-RPP01-JUR-001-V0.1.md,0.1,2026-07-16,vigente_interno,,Dossiê restrito de autoria confidencialidade e rastreabilidade criado,Diego da Silva,18afd72708b85907ad81d5c3edc507a6747e202394a54f68dcddfae3f15deb9c
+MDN-RPP01-COM-001,MDN-RPP01-COM-001-V0.1.md,0.1,2026-07-16,rascunho_bloqueado,,Minuta pública de posicionamento criada sem autorização de circulação,Diego da Silva,bb7f7df97b56435284170d0ce7b3e5dab69b69be41bec4278a6731005b9d1ccc
+MDN-RPP01-VER-001,../09_versoes_substituidas/MDN-RPP01-VER-001-V0.1.csv,0.1,2026-07-16,substituida,,Índice inicial preservado,responsavel_do_projeto,76cd768624f3fe21600eabe89ea89d405f5e0d5a8adffaf91c760f906595998c
+

@@ -1,0 +1,216 @@
+metadata:
+  nome_arquivo: "categorias_operacionais.yml"
+  versao: "1.0"
+  data_criacao: "2026-06-16"
+  finalidade: "Definir dicionario tecnico de categorias operacionais para uso futuro por scripts de classificacao, sem executar classificacao nesta etapa."
+  uso_previsto: "Apoiar scripts posteriores na identificacao auditavel de temas ligados ao produto tangivel, estrutura fisica, operacao e entrega concreta do evento."
+  restricoes:
+    - "Nao executar classificacao automaticamente a partir deste arquivo nesta etapa."
+    - "Nao substituir revisao humana quando houver ambiguidade."
+    - "Nao gerar diagnostico estrategico, reputacional ou interpretativo."
+    - "Nao excluir registros com base nestas categorias."
+
+categorias:
+  - id: "fila"
+    nome: "fila"
+    descricao: "Captura mencoes a espera, demora, organizacao de filas e fluxo de pessoas antes ou durante o acesso a servicos do evento."
+    tipo_categoria: "operacional"
+    palavras_chave: ["fila", "filao", "espera", "demora", "aguardando", "queue", "entrar", "esperando", "andar", "travado"]
+    expressoes_equivalentes: ["fiquei muito tempo esperando", "a fila nao andava", "demorou para entrar", "muita espera para comprar"]
+    exemplos_comentarios: ["A fila estava enorme e demorou demais.", "Fiquei quase uma hora esperando para entrar."]
+    criterios_inclusao: "Incluir quando o comentario tratar de espera, organizacao, tamanho ou velocidade de qualquer fila."
+    criterios_exclusao: "Nao incluir quando a palavra fila for usada de forma figurada sem relacao operacional com o evento."
+    peso_inicial: 3
+    observacoes: "Pode se sobrepor a entrada, bar ou banheiro; manter foco no problema de espera."
+
+  - id: "entrada"
+    nome: "entrada"
+    descricao: "Captura mencoes ao processo de chegada, validacao de ingresso e passagem pela entrada do evento."
+    tipo_categoria: "operacional"
+    palavras_chave: ["entrada", "entrar", "portaria", "check-in", "checkin", "ingresso", "catraca", "acesso inicial"]
+    expressoes_equivalentes: ["problema para entrar", "demorou na portaria", "nao acharam meu ingresso", "entrada confusa"]
+    exemplos_comentarios: ["A entrada foi confusa e ninguem orientava.", "Meu ingresso demorou para ser validado."]
+    criterios_inclusao: "Incluir quando o comentario tratar do procedimento de entrada ou validacao inicial."
+    criterios_exclusao: "Nao incluir se entrada significar apenas ingresso comprado sem problema operacional."
+    peso_inicial: 3
+    observacoes: "Pode se relacionar a acesso; usar entrada quando houver mencao ao ponto inicial de chegada."
+
+  - id: "acesso"
+    nome: "acesso"
+    descricao: "Captura mencoes a rotas, permissao, deslocamento interno, acessibilidade ou facilidade de chegar a areas do evento."
+    tipo_categoria: "operacional"
+    palavras_chave: ["acesso", "acessar", "acessibilidade", "pcd", "cadeirante", "rampa", "area vip", "pulseira", "bloqueado"]
+    expressoes_equivalentes: ["nao consegui acessar", "dificil chegar no setor", "acesso ruim", "area bloqueada sem aviso"]
+    exemplos_comentarios: ["O acesso ao setor estava mal sinalizado.", "Faltou acessibilidade para cadeirantes."]
+    criterios_inclusao: "Incluir quando houver mencao a permissao, rota, barreira fisica ou acesso a areas."
+    criterios_exclusao: "Nao incluir mencoes genericas a entrar no evento quando o foco for portaria."
+    peso_inicial: 3
+    observacoes: "Diferenciar de sinalizacao quando o problema central for orientacao visual."
+
+  - id: "seguranca"
+    nome: "segurança"
+    descricao: "Captura mencoes a seguranca, equipe de apoio, controle de risco, brigas, furtos ou sensacao de protecao fisica."
+    tipo_categoria: "operacional"
+    palavras_chave: ["seguranca", "segurança", "seguranca fraca", "briga", "furto", "roubo", "confusao", "equipe", "controle", "risco"]
+    expressoes_equivalentes: ["me senti inseguro", "faltou seguranca", "tinha muita briga", "nao tinha equipe por perto"]
+    exemplos_comentarios: ["A segurança demorou para agir.", "Me senti insegura em alguns momentos."]
+    criterios_inclusao: "Incluir quando o comentario abordar protecao, equipe de seguranca ou incidentes fisicos."
+    criterios_exclusao: "Nao incluir medo subjetivo sem relacao com estrutura ou operacao do evento."
+    peso_inicial: 3
+    observacoes: "Pode ter leitura emocional futura, mas aqui deve ser tratado como topico operacional."
+
+  - id: "bar"
+    nome: "bar"
+    descricao: "Captura mencoes ao servico de bar, bebidas, atendimento no bar, estoque, pagamento ou tempo de compra."
+    tipo_categoria: "operacional"
+    palavras_chave: ["bar", "bebida", "drink", "cerveja", "agua", "água", "dose", "caixa", "comanda", "pagamento"]
+    expressoes_equivalentes: ["bar muito demorado", "faltou bebida", "bebida quente", "nao consegui comprar agua"]
+    exemplos_comentarios: ["O bar estava lento e faltou água.", "A cerveja acabou cedo."]
+    criterios_inclusao: "Incluir quando o comentario tratar de compra, qualidade ou disponibilidade de bebidas."
+    criterios_exclusao: "Nao incluir mencoes a preco de bebida quando o foco principal for custo."
+    peso_inicial: 3
+    observacoes: "Pode se sobrepor a fila, atendimento e preco; registrar conforme foco textual predominante."
+
+  - id: "banheiro"
+    nome: "banheiro"
+    descricao: "Captura mencoes a banheiros, limpeza, disponibilidade, filas, estrutura e manutencao sanitaria."
+    tipo_categoria: "operacional"
+    palavras_chave: ["banheiro", "banheiros", "toalete", "wc", "sanitario", "xixi", "limpeza", "papel", "descarga", "lavabo"]
+    expressoes_equivalentes: ["banheiro sujo", "faltou papel", "fila do banheiro", "poucos banheiros"]
+    exemplos_comentarios: ["Os banheiros estavam sem papel.", "Tinha pouca cabine para muita gente."]
+    criterios_inclusao: "Incluir quando o comentario mencionar estrutura, limpeza ou uso dos banheiros."
+    criterios_exclusao: "Nao incluir se banheiro aparecer apenas como referencia de local sem avaliacao ou problema."
+    peso_inicial: 3
+    observacoes: "Fila de banheiro pode receber tambem fila, dependendo da metodologia futura."
+
+  - id: "som"
+    nome: "som"
+    descricao: "Captura mencoes a volume, nitidez, falhas tecnicas, equalizacao, microfone ou qualidade sonora."
+    tipo_categoria: "operacional"
+    palavras_chave: ["som", "audio", "áudio", "grave", "volume", "microfone", "caixa", "estourado", "baixo", "equalizacao"]
+    expressoes_equivalentes: ["som estava ruim", "nao dava para ouvir", "audio estourado", "volume muito baixo"]
+    exemplos_comentarios: ["O som estava estourado perto do palco.", "Nao dava para ouvir a voz direito."]
+    criterios_inclusao: "Incluir quando houver mencao a desempenho sonoro ou falha de audio."
+    criterios_exclusao: "Nao incluir gosto musical ou repertorio quando nao houver avaliacao tecnica do som."
+    peso_inicial: 3
+    observacoes: "Separar qualidade tecnica do som de opiniao sobre artista ou musica."
+
+  - id: "palco"
+    nome: "palco"
+    descricao: "Captura mencoes a visibilidade, posicionamento, estrutura, montagem ou operacao do palco."
+    tipo_categoria: "operacional"
+    palavras_chave: ["palco", "stage", "visao", "visão", "estrutura", "telão", "telao", "altura", "montagem", "backline"]
+    expressoes_equivalentes: ["nao dava para ver o palco", "palco mal posicionado", "estrutura do palco estava boa"]
+    exemplos_comentarios: ["O palco ficou baixo para quem estava atras.", "A estrutura do palco estava bonita e funcional."]
+    criterios_inclusao: "Incluir quando o comentario tratar da estrutura fisica ou visibilidade do palco."
+    criterios_exclusao: "Nao incluir mencoes ao show no palco quando o foco for performance artistica."
+    peso_inicial: 2
+    observacoes: "Pode se relacionar a lotacao quando a visibilidade piora por excesso de pessoas."
+
+  - id: "iluminacao"
+    nome: "iluminação"
+    descricao: "Captura mencoes a luz, efeitos visuais, iluminacao de seguranca, excesso ou falta de claridade."
+    tipo_categoria: "operacional"
+    palavras_chave: ["luz", "luzes", "iluminacao", "iluminação", "laser", "led", "escuro", "claro", "strobo", "visual"]
+    expressoes_equivalentes: ["luz muito forte", "ambiente escuro demais", "iluminacao incrivel", "faltou luz no caminho"]
+    exemplos_comentarios: ["A iluminação do palco estava muito boa.", "O caminho para sair estava escuro."]
+    criterios_inclusao: "Incluir quando houver mencao a luz ou iluminacao como elemento tecnico do evento."
+    criterios_exclusao: "Nao incluir uso metaforico de luz sem relacao com estrutura fisica."
+    peso_inicial: 2
+    observacoes: "Distinguir iluminacao cenica de sinalizacao ou seguranca quando possivel."
+
+  - id: "preco"
+    nome: "preço"
+    descricao: "Captura mencoes a valor, custo, caro, barato, taxa, ingresso, bebida ou percepcao objetiva de preco."
+    tipo_categoria: "operacional"
+    palavras_chave: ["preco", "preço", "valor", "caro", "barato", "taxa", "custo", "ingresso", "consumo", "absurdo"]
+    expressoes_equivalentes: ["muito caro", "preco justo", "valor abusivo", "taxa alta", "bebida cara"]
+    exemplos_comentarios: ["Achei o ingresso caro pelo que entregou.", "O preço da água estava absurdo."]
+    criterios_inclusao: "Incluir quando o comentario avaliar ou mencionar valores cobrados."
+    criterios_exclusao: "Nao incluir compra sem mencao a valor, custo ou percepcao de preco."
+    peso_inicial: 3
+    observacoes: "Pode carregar percepcao subjetiva, mas a categoria registra o tema operacional de preco."
+
+  - id: "compra"
+    nome: "compra"
+    descricao: "Captura mencoes ao processo de compra de ingresso, comanda, produto, bebida ou qualquer transacao."
+    tipo_categoria: "operacional"
+    palavras_chave: ["compra", "comprar", "pagamento", "pix", "cartao", "cartão", "site", "app", "pedido", "cobranca"]
+    expressoes_equivalentes: ["nao consegui comprar", "pagamento nao passava", "site caiu", "erro na compra"]
+    exemplos_comentarios: ["Tive problema para comprar pelo site.", "O pagamento por cartão travou no bar."]
+    criterios_inclusao: "Incluir quando o comentario tratar de transacao, pagamento ou processo de aquisicao."
+    criterios_exclusao: "Nao incluir quando a palavra comprar aparecer sem problema ou avaliacao operacional."
+    peso_inicial: 2
+    observacoes: "Pode se sobrepor a bar, preco e atendimento; usar conforme contexto."
+
+  - id: "atendimento"
+    nome: "atendimento"
+    descricao: "Captura mencoes a interacao com equipe, orientadores, caixas, bar, suporte, cordialidade ou preparo operacional."
+    tipo_categoria: "operacional"
+    palavras_chave: ["atendimento", "atendente", "equipe", "staff", "funcionario", "funcionário", "suporte", "educado", "grosso", "orientacao"]
+    expressoes_equivalentes: ["fui mal atendido", "equipe despreparada", "atendente ajudou bastante", "ninguém sabia informar"]
+    exemplos_comentarios: ["O atendimento do bar foi muito lento.", "A equipe foi educada e resolveu rápido."]
+    criterios_inclusao: "Incluir quando o comentario avaliar contato com equipe ou suporte operacional."
+    criterios_exclusao: "Nao incluir elogio generico ao evento sem mencao a equipe ou atendimento."
+    peso_inicial: 3
+    observacoes: "Pode ter tom positivo ou negativo; nao inferir sentimento automaticamente nesta etapa."
+
+  - id: "sinalizacao"
+    nome: "sinalização"
+    descricao: "Captura mencoes a placas, orientacao visual, mapas, indicacoes de setores, banheiros, saidas ou fluxo."
+    tipo_categoria: "operacional"
+    palavras_chave: ["sinalizacao", "sinalização", "placa", "mapa", "indicacao", "indicação", "orientacao", "setor", "saida", "entrada"]
+    expressoes_equivalentes: ["faltou placa", "nao tinha sinalizacao", "dificil achar o banheiro", "setores mal indicados"]
+    exemplos_comentarios: ["Faltou sinalização para encontrar a saída.", "As placas dos setores ajudaram bastante."]
+    criterios_inclusao: "Incluir quando o comentario tratar de orientacao espacial por informacao visual ou indicativa."
+    criterios_exclusao: "Nao incluir dificuldade de acesso sem mencao a orientacao, placa ou informacao."
+    peso_inicial: 2
+    observacoes: "Pode aparecer junto de acesso; manter foco em informacao de direcao."
+
+  - id: "transporte"
+    nome: "transporte"
+    descricao: "Captura mencoes a chegada ou saida por transporte publico, aplicativo, estacionamento, taxi, van ou deslocamento externo."
+    tipo_categoria: "operacional"
+    palavras_chave: ["transporte", "uber", "99", "taxi", "ônibus", "onibus", "metro", "metrô", "estacionamento", "van"]
+    expressoes_equivalentes: ["dificil pedir uber", "sem transporte na saida", "estacionamento caro", "onibus lotado"]
+    exemplos_comentarios: ["Foi muito difícil conseguir aplicativo na saída.", "O estacionamento estava bem organizado."]
+    criterios_inclusao: "Incluir quando o comentario tratar do deslocamento para chegar ou sair do evento."
+    criterios_exclusao: "Nao incluir deslocamento interno dentro do evento sem relacao com transporte externo."
+    peso_inicial: 2
+    observacoes: "Pode depender de fatores externos ao evento; registrar com cautela."
+
+  - id: "lotacao"
+    nome: "lotação"
+    descricao: "Captura mencoes a excesso de pessoas, aperto, capacidade, superlotacao ou conforto de circulacao."
+    tipo_categoria: "operacional"
+    palavras_chave: ["lotacao", "lotação", "lotado", "cheio", "apertado", "superlotado", "multidao", "multidão", "capacidade", "espaco"]
+    expressoes_equivalentes: ["estava cheio demais", "nao dava para andar", "muita gente para pouco espaco", "superlotado"]
+    exemplos_comentarios: ["O lugar estava lotado demais.", "Tinha espaço suficiente para circular."]
+    criterios_inclusao: "Incluir quando o comentario tratar de densidade de publico ou circulacao por excesso de pessoas."
+    criterios_exclusao: "Nao incluir mencao positiva a evento cheio sem relacao com conforto ou operacao."
+    peso_inicial: 3
+    observacoes: "Pode afetar fila, seguranca, banheiro e visibilidade; evitar duplicacao automatica sem regra futura."
+
+  - id: "climatizacao"
+    nome: "climatização"
+    descricao: "Captura mencoes a temperatura, calor, frio, ventilacao, ar-condicionado ou conforto termico."
+    tipo_categoria: "operacional"
+    palavras_chave: ["calor", "frio", "ar condicionado", "ar-condicionado", "ventilacao", "ventilação", "climatizacao", "climatização", "abafado"]
+    expressoes_equivalentes: ["muito quente", "ambiente abafado", "faltou ventilacao", "ar condicionado forte demais"]
+    exemplos_comentarios: ["Estava muito quente lá dentro.", "A climatização deixou o ambiente confortável."]
+    criterios_inclusao: "Incluir quando o comentario mencionar temperatura ou ventilacao do ambiente."
+    criterios_exclusao: "Nao incluir calor humano ou animacao do publico em sentido figurado."
+    peso_inicial: 2
+    observacoes: "Pode ser confundida com lotacao quando calor decorre de excesso de pessoas."
+
+  - id: "revista"
+    nome: "revista"
+    descricao: "Captura mencoes ao procedimento de revista, checagem de bolsas, controle de objetos e abordagem na entrada."
+    tipo_categoria: "operacional"
+    palavras_chave: ["revista", "revistaram", "bolsa", "mochila", "detector", "checagem", "objeto", "proibido", "seguranca"]
+    expressoes_equivalentes: ["revista demorada", "revistaram minha bolsa", "controle de objetos confuso", "detector travou a entrada"]
+    exemplos_comentarios: ["A revista foi demorada e desorganizada.", "A equipe explicou bem o que podia entrar."]
+    criterios_inclusao: "Incluir quando o comentario tratar especificamente do procedimento de revista ou checagem."
+    criterios_exclusao: "Nao incluir seguranca em geral quando nao houver mencao ao ato de revista."
+    peso_inicial: 2
+    observacoes: "Pode se sobrepor a seguranca e entrada; usar quando o procedimento de inspecao for central."

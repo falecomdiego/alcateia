@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "round_id": "MDN-RPP01",
+  "round_status": "coleta_autorizada",
+  "purpose": "validacao_metodologica_pre_comercial",
+  "scope": "cena_eletronica_e_lgbtqia_mais_de_sao_paulo",
+  "period": {
+    "start": "2026-06-01",
+    "end": "2026-06-30",
+    "timezone": "America/Sao_Paulo"
+  },
+  "paths": {
+    "round_root": "20_rodada_prospectiva_padronizada_01",
+    "raw_protected": "20_rodada_prospectiva_padronizada_01/02_dados_brutos_protegidos/dados",
+    "processing": "20_rodada_prospectiva_padronizada_01/03_processamento_por_lote",
+    "validation": "20_rodada_prospectiva_padronizada_01/04_validacao_humana",
+    "lineage": "20_rodada_prospectiva_padronizada_01/05_consolidacao_e_linhagem",
+    "internal_product": "20_rodada_prospectiva_padronizada_01/06_produto_interno",
+    "public_product": "20_rodada_prospectiva_padronizada_01/07_publicacao_sanitizada"
+  },
+  "taxonomy": {
+    "version": "1.1",
+    "source": "00_contexto_mestre/TAXONOMIA_MESTRE_MAPA_DA_NOITE_V1_1.md",
+    "sha256": "9f6aa0a7e787e2886c061aa073df45c39820a4d83e12332ef3834d7bebca4097",
+    "frozen_for_round": true,
+    "allow_mid_round_changes": false
+  },
+  "lots": [],
+  "gates": {
+    "G0_protocol": true,
+    "G1_collection": false,
+    "G2_analysis": false,
+    "G3_consolidation": false,
+    "G4_publication": false,
+    "G5_reapplication": false
+  },
+  "validation": {
+    "minimum_sample": 200,
+    "sample_rate": 0.1,
+    "double_review_rate": 0.2,
+    "minimum_public_precision": 0.85,
+    "require_second_reviewer_for_publication": true
+  },
+  "public_safety": {
+    "minimum_cell_size": 5,
+    "allow_literal_comments": false,
+    "allow_profile_names": false,
+    "allow_profile_urls": false,
+    "allow_user_ids": false,
+    "allow_individual_rankings": false,
+    "allow_attributable_accusations": false
+  },
+  "cleaning": {
+    "emoji_only_policy": "fora_classificacao_textual",
+    "allow_unlogged_exclusion": false,
+    "duplicate_scope": "mesmo_arquivo_autor_pseudonimo_texto"
+  },
+  "required_original_columns": [
+    "my-serial-number",
+    "index",
+    "User ID",
+    "Avatar URL",
+    "Profile URL",
+    "User Name",
+    "Comment Text",
+    "Comment Date"
+  ],
+  "control_columns": [
+    "rodada_id",
+    "registro_id",
+    "lote",
+    "fonte_id",
+    "coleta_id",
+    "arquivo_origem",
+    "hash_arquivo_origem",
+    "aba_origem",
+    "linha_origem",
+    "versao_taxonomia",
+    "execucao_id"
+  ]
+}
+

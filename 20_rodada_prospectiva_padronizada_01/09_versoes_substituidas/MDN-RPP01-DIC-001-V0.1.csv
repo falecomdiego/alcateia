@@ -1,0 +1,33 @@
+campo,camada,tipo,definicao,origem,finalidade,responsavel,nivel_acesso,retencao,divulgacao,regra_validacao
+my-serial-number,protegida,texto,Numeração original exportada,XLSX bruto,Preservar estrutura original,a_confirmar,restrito,a_definir,nunca,Coluna obrigatória sem alteração
+index,protegida,texto,Índice original exportado,XLSX bruto,Preservar estrutura original,a_confirmar,restrito,a_definir,nunca,Coluna obrigatória sem alteração
+User ID,protegida,texto,Identificador original de usuário,XLSX bruto,Auditoria interna e pseudonimização,a_confirmar,restrito,a_definir,nunca,Não copiar para camada de trabalho
+Avatar URL,protegida,texto,URL original de avatar,XLSX bruto,Auditoria de origem,a_confirmar,restrito,a_definir,nunca,Não copiar para camada de trabalho
+Profile URL,protegida,texto,URL original de perfil,XLSX bruto,Auditoria de origem,a_confirmar,restrito,a_definir,nunca,Não copiar para camada de trabalho
+User Name,protegida,texto,Nome de usuário original,XLSX bruto,Auditoria de origem,a_confirmar,restrito,a_definir,nunca,Não copiar para camada de trabalho
+Comment Text,protegida,texto,Comentário original,XLSX bruto,Evidência interna rastreável,a_confirmar,restrito,a_definir,nunca,Preservar sem alteração
+Comment Date,protegida,texto,Data do comentário como exportada,XLSX bruto,Controle temporal,a_confirmar,restrito,a_definir,somente_agregada,Não inferir data da postagem
+rodada_id,controle,texto,Código estável da rodada,configuração,Separar ciclos,a_confirmar,interno,permanente,metodologia,Igual a MDN-RPP01
+registro_id,controle,texto,Código indivisível da linha,pipeline,Rastreabilidade,a_confirmar,interno,permanente,nunca,Único em toda a rodada
+lote,controle,texto,Código do lote,manifesto de lote,Isolamento operacional,a_confirmar,interno,permanente,agregado,Um registro pertence a um lote
+fonte_id,controle,texto,Código da fonte,inventário de fontes,Ligação com seleção,a_confirmar,restrito,permanente,nunca,Deve existir no inventário
+coleta_id,controle,texto,Código da tentativa de coleta,log de coleta,Ligação com procedimento,a_confirmar,restrito,permanente,nunca,Deve existir no log
+arquivo_origem,controle,texto,Nome do XLSX preservado,pipeline,Cadeia de custódia,a_confirmar,restrito,permanente,nunca,Deve constar no manifesto do lote
+hash_arquivo_origem,controle,texto,SHA-256 do XLSX,pipeline,Integridade,a_confirmar,interno,permanente,nunca,64 caracteres hexadecimais
+aba_origem,controle,texto,Aba do XLSX,pipeline,Rastreabilidade,a_confirmar,interno,permanente,nunca,Não vazio
+linha_origem,controle,inteiro,Linha física na aba,pipeline,Rastreabilidade,a_confirmar,interno,permanente,nunca,Inteiro maior que um
+versao_taxonomia,controle,texto,Versão congelada,configuração,Reprodução,a_confirmar,interno,permanente,metodologia,Igual a 1.1
+execucao_id,controle,texto,Código da execução,pipeline,Reprodução,a_confirmar,interno,permanente,metodologia,Formato MDN-RPP01-EXE-AAAAMMDD-HHMMSS
+autor_pseudo_id,trabalho,texto,Pseudônimo determinístico do autor,pipeline,Análise sem identificador direto,a_confirmar,restrito,a_definir,nunca,HMAC com segredo externo ao Git
+comentario_trabalho,trabalho,texto,Cópia de trabalho do comentário,pipeline,Classificação interna,a_confirmar,restrito,a_definir,nunca,Não circular publicamente
+status_tratamento,trabalho,categoria,Situação da linha,pipeline,Reconciliação,a_confirmar,interno,permanente,agregado,mantido|excluido_tecnico|fora_classificacao_textual
+motivo_tratamento,trabalho,texto,Justificativa da situação,pipeline,Auditoria,a_confirmar,interno,permanente,agregado,Obrigatório quando não mantido
+frente_taxonomica,trabalho,categoria,Frente V1.1 identificada,pipeline,Organização analítica,a_confirmar,interno,permanente,condicionada,Uma frente oficial ou nao_determinado
+termos_detectados,trabalho,texto,Termos recuperáveis que sustentam a sugestão,pipeline,Justificativa,a_confirmar,interno,permanente,nunca,Obrigatório para sugestão automática
+status_classificacao,trabalho,categoria,Estado da classificação,pipeline,Separar sugestão de decisão,a_confirmar,interno,permanente,agregado,sugerida|validada|rejeitada|nao_determinado
+requer_validacao_humana,trabalho,booleano,Sinalizador de caso sensível,pipeline,Gate humano,a_confirmar,interno,permanente,agregado,true|false
+decisao_humana_id,trabalho,texto,Vínculo com decisão humana,matriz de validação,Rastreabilidade da revisão,a_confirmar,interno,permanente,nunca,Obrigatório para estado validada ou rejeitada
+grupo_id,consolidada,texto,Código do agrupamento,pipeline,Linhagem relacional,a_confirmar,interno,permanente,agregado,Único
+afirmacao_id,evidencia,texto,Código da afirmação,matriz de evidências,Rastreabilidade do produto,a_confirmar,interno,permanente,agregado,Único
+tipo_afirmacao,evidencia,categoria,Natureza epistemológica da afirmação,matriz de evidências,Distinguir estados,a_confirmar,interno,permanente,metodologia,evidencia_observada|inferencia_analitica|recomendacao|decisao_humana
+

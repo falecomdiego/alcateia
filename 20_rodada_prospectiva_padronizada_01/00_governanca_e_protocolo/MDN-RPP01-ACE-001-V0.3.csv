@@ -1,0 +1,4 @@
+registro_id,camada,recurso,papel,pessoa_ou_grupo,nivel_acesso,data_inicio,data_fim,autorizador,justificativa,status,ultima_revisao
+MDN-RPP01-ACE-0001,governanca_restrita,MDN-RPP01-JUR-001,titular_do_projeto,Diego da Silva,integral,2026-07-16,,Diego da Silva,autoria custodia e decisão interna,ativo,2026-07-16
+MDN-RPP01-ACE-0002,dados_brutos_protegidos,02_dados_brutos_protegidos/dados/,operador_de_coleta,Diego da Silva,integral,2026-07-20,,Diego da Silva,operacao de coleta e custodia,ativo,2026-07-20
+MDN-RPP01-ACE-0003,dados_brutos_protegidos,02_dados_brutos_protegidos/dados/,revisor_humano,Kacia Oliveira,restrito_leitura,2026-07-20,,Diego da Silva,revisao e auditoria independente do gate G4,ativo,2026-07-20

@@ -1,0 +1,3 @@
+registro_id,camada,recurso,papel,pessoa_ou_grupo,nivel_acesso,data_inicio,data_fim,autorizador,justificativa,status,ultima_revisao
+MDN-RPP01-ACE-0001,governanca_restrita,MDN-RPP01-JUR-001,titular_do_projeto,Diego da Silva,integral,2026-07-16,,Diego da Silva,autoria custodia e decisão interna,ativo,2026-07-16
+

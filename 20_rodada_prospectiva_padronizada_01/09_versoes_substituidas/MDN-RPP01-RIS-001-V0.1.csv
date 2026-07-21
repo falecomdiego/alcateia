@@ -1,0 +1,11 @@
+risco_id,etapa,risco,causa,efeito,probabilidade,impacto,controle_preventivo,gatilho_suspensao,responsavel,status
+MDN-RPP01-RIS-001,G0,Escopo retrospectivo,Objetivo ou período definidos após contato com resultados,Narrativa adaptada ao resultado,media,alto,Manifesto aprovado antes da coleta,Coleta iniciada com campos obrigatórios pendentes,a_confirmar,aberto
+MDN-RPP01-RIS-002,G1,Coleta incompleta,Ferramenta ou paginação não registradas,Corpus sem completude verificável,alta,alto,Log por tentativa e configuração preservada,Diferença sem explicação entre fontes previstas e arquivos,a_confirmar,aberto
+MDN-RPP01-RIS-003,G1,Alteração de bruto,Sobrescrita ou manipulação do XLSX,Perda de cadeia de custódia,baixa,critico,Imutabilidade e hash SHA-256,Hash divergente ou data incompatível,a_confirmar,aberto
+MDN-RPP01-RIS-004,G2,Classificação forçada,Cobertura insuficiente da taxonomia ou das regras,Superinterpretação,alta,alto,Opção não determinado e revisão humana,Classificação sem termo ou justificativa recuperável,a_confirmar,aberto
+MDN-RPP01-RIS-005,G2,Apagamento de sinal não textual,Exclusão automática de emojis,Perda cultural e afetiva,media,medio,Manter fora_classificacao_textual sem remover,Soma de entrada não reconciliada,a_confirmar,aberto
+MDN-RPP01-RIS-006,G3,Quebra de linhagem,Identificadores concatenados ou decompostos,Agregado sem retorno à origem,media,critico,Tabela relacional grupo_registro,Vínculo ausente ou volume divergente,a_confirmar,aberto
+MDN-RPP01-RIS-007,G4,Reidentificação,Combinação de nomes trechos URLs ou células pequenas,Exposição individual,alta,critico,Sanitização automática e revisão humana,Qualquer identificador ou célula menor que cinco,a_confirmar,aberto
+MDN-RPP01-RIS-008,G4,Publicação prematura,Produto técnico tratado como autorizado,Risco reputacional e de governança,media,critico,Gate datado e assinado,G4 falso ou segundo revisor ausente,a_confirmar,aberto
+MDN-RPP01-RIS-009,G5,Dependência do idealizador,Documentação insuficiente,Baixa reaplicabilidade,alta,alto,Teste independente com fixture,Terceiro não conclui sem intervenção estrutural,a_confirmar,aberto
+

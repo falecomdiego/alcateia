@@ -1,0 +1,30 @@
+{
+  "rodada_id": "MDN-RPP01",
+  "versao_manifesto": "1.0",
+  "data_emissao": "2026-07-21T19:27:00-03:00",
+  "responsavel_tecnico": "Diego da Silva",
+  "revisora_independente": "Kacia Oliveira",
+  "status_global": "G0_G5_APROVADOS",
+  "taxonomia_versao": "V1.1_CONGELADA",
+  "periodo_referencia": {
+    "inicio": "2026-06-01",
+    "fim": "2026-06-30"
+  },
+  "total_fontes_coletadas": 30,
+  "total_linhas_brutas": 7468,
+  "total_linhas_validas_limpas": 7421,
+  "total_linhas_excluidas_log": 47,
+  "gates_status": {
+    "G0_protocolo": "aprovado",
+    "G1_coleta": "aprovado",
+    "G2_analise_lote": "aprovado",
+    "G3_consolidacao": "aprovado",
+    "G4_publicacao": "aprovado",
+    "G5_reaplicacao": "aprovado"
+  },
+  "seguranca_e_privacidade": {
+    "lgpd_expurgo_pii": true,
+    "supressao_celulas_n_menor_5": true,
+    "hash_algoritmo": "SHA-256"
+  }
+}

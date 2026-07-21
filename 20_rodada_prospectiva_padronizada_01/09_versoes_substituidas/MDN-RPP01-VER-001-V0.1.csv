@@ -1,0 +1,7 @@
+artefato_id,arquivo,versao,data,status,substitui,alteracao_resumida,responsavel,hash_sha256
+MDN-RPP01-MAN-001,MDN-RPP01-MAN-001-V0.1.md,0.1,2026-07-16,rascunho,,Manifesto preventivo criado,responsavel_do_projeto,eebc2da8fe065e1467b2957f3fdad83228676860bc0b4463f39a70a28bc38105
+MDN-RPP01-GOV-001,MDN-RPP01-GOV-001-V0.1.md,0.1,2026-07-16,vigente,,Governança mínima e gates criados,responsavel_do_projeto,e6eb887bcde825561bac887ab1cf947f5f79204c84cdd9a5cd333ac37c36f772
+MDN-RPP01-RIS-001,MDN-RPP01-RIS-001-V0.1.csv,0.1,2026-07-16,vigente,,Matriz inicial de riscos criada,responsavel_do_projeto,b9c8d239535f6dc555645c9963fe84645e543104cea3a0bcb30f674f0fdca60e
+MDN-RPP01-DEC-001,MDN-RPP01-DEC-001-V0.1.csv,0.1,2026-07-16,vigente,,Diário de decisões iniciado,responsavel_do_projeto,5a8bae216e0d5f5b90b66bfe064fd8956e8dc3cf52bf2be9e2fec491a3a9235f
+MDN-TAX-001,../../00_contexto_mestre/TAXONOMIA_MESTRE_MAPA_DA_NOITE_V1_1.md,1.1,2026-06-19,congelada_para_rodada,,Taxonomia oficial preservada,responsavel_do_projeto,9f6aa0a7e787e2886c061aa073df45c39820a4d83e12332ef3834d7bebca4097
+
