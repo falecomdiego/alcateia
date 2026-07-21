@@ -15,7 +15,7 @@
 O objetivo deste experimento formal é **comprovar empiricamente a viabilidade, a corretude e a reprodutibilidade** da arquitetura ALCATEIA (v1.0) como um ecossistema determinístico de apoio à tomada de decisões estratégicas de alta complexidade. 
 
 O experimento visa responder à seguinte pergunta científica de pesquisa:
-> *É possível automatizar a geração de recomendações táticas sob rigoroso compliance de privacidade (LGPD), sem qualquer alucinação factual e com rastreabilidade criptográfica matemática de 100% de volta às fontes brutas?*
+> *É possível automatizar a geração de recomendações táticas sob rigoroso compliance de privacidade (LGPD), sem qualquer alucinação factual e com rastreabilidade criptográfica matemática de volta às fontes brutas?*
 
 Esta rodada de testes práticos, baseada no caso de teste real do Mapa da Noite (MDN-RPP01), serve como o **Marco Zero de Validação** da metodologia de inteligência baseada em evidências, estabelecendo o registro definitivo de auditoria da **camada de Investigação** do projeto.
 
@@ -23,9 +23,9 @@ Esta rodada de testes práticos, baseada no caso de teste real do Mapa da Noite 
 
 ## 2. Hipóteses a Serem Validadas
 
-*   **Hipótese Primária ($H_1$)**: A união entre processamento probabilístico e validação determinística de hashes `SHA-256` das fontes brutas impede a ocorrência de alucinações cognitivas no relatório final, garantindo que **100% das evidências factuais** que embasam a recomendação estratégica final existam de fato na origem dos dados brutos.
-*   **Hipótese Secundária ($H_2$)**: O processamento em memória e o desacoplamento das regras de domínio por meio de adaptadores declarativos de contexto (*Context Packages*) reduzem o tempo de execução do pipeline a níveis subsegundos, viabilizando-o para processamento contínuo em larga escala.
-*   **Hipótese de Proteção ($H_3$)**: A sanitização heurística em tempo de execução (*Execution Service*) remove 100% das informações pessoais identificáveis (PII) – tais como celulares, e-mails e identificadores sensíveis – sem comprometer a riqueza léxica necessária para o processamento de categorização taxonômica.
+*   **Hipótese Primária ($H_1$)**: A união entre processamento probabilístico e validação determinística de hashes `SHA-256` das fontes brutas impede a ocorrência de alucinações cognitivas no relatório final, garantindo que **as evidências factuais** que embasam a recomendação estratégica final existam de fato na origem dos dados brutos.
+*   **Hipótese Secundária ($H_2$)**: O processamento em memória e o desacoplamento das regras de domínio por meio de adaptadores declarativos de contexto (*Context Packages*) reduzem drasticamente o tempo de execução do pipeline, viabilizando-o para processamento contínuo em larga escala.
+*   **Hipótese de Proteção ($H_3$)**: A sanitização heurística em tempo de execução (*Execution Service*) remove informações pessoais identificáveis (PII) sensíveis - sem comprometer a riqueza léxica necessária para o processamento de categorização taxonômica.
 
 ---
 
@@ -88,7 +88,7 @@ O experimento mapeia responsabilidades nominalmente, garantindo o acompanhamento
 
 ### Agentes de Software (Mapeamento Funcional)
 *   **Discovery Agent (`DiscoveryService`)**: Identifica e valida a elegibilidade do pacote de contexto associado à pergunta central.
-*   **Execution Agent (`ExecutionService`)**: Executa a limpeza determinística pesada dos 7.468 registros em milissegundos.
+*   **Execution Agent (`ExecutionService`)**: Executa a limpeza determinística pesada dos 7.468 registros com alta eficiência.
 *   **Evidence Agent (`EvidenceService`)**: Atua como o "Guardião da Origem", impedindo que arquivos modificados corrompam a linhagem.
 *   **Reasoning Agent (`ReasoningService`)**: Condensa os dados sanitizados e extrai os fragmentos mais críticos para embasamento.
 *   **Audit Agent (`AuditService`)**: Executa a selagem lógica da MUE e exporta os arquivos físicos finais de auditoria.
@@ -101,12 +101,12 @@ Para que o experimento seja considerado metodologicamente bem-sucedido e aprovad
 
 | Métrica de Desempenho | Alvo Requerido | Resultado Obtido | Status |
 | :--- | :---: | :---: | :---: |
-| **Linhagem de Evidências** | 100% de rastreabilidade | **100.0%** | **Aprovado** |
-| **Exclusão de Dados Pessoais** | 100% de PII limpo na saída | **100.0%** | **Aprovado** |
+| **Linhagem de Evidências** | Rastreabilidade criptográfica | **Sucesso** | **Aprovado** |
+| **Exclusão de Dados Pessoais** | Anonimização dos registros de saída | **Sucesso** | **Aprovado** |
 | **Tempo de Resposta (Mapa)** | < 2.0 segundos (7.4k registros) | **0.18 segundos** | **Aprovado** |
 | **Tempo de Resposta (Saúde)** | < 1.0 segundo (UBS simulado) | **0.001 segundos** | **Aprovado** |
 | **Segurança Criptográfica** | Interrupção imediata em falsificação | **Sucesso (Bloqueio integral)** | **Aprovado** |
-| **Velocidade da Suíte de Testes** | < 0.50 segundos | **0.006 segundos** | **Aprovado** |
+| **Velocidade da Suíte de Testes** | < 0.50 segundos | **Atingido** | **Aprovado** |
 
 ---
 
@@ -124,7 +124,7 @@ O experimento é declarado aceito e congelado sob os seguintes critérios:
 O experimento foi executado integralmente em ambiente Windows e validou todas as hipóteses estipuladas.
 
 ### Hipóteses Confirmadas
-1.  **Confirmação de $H_1$**: A rastreabilidade matemática foi de 100%. Cada fragmento de texto citado na MUE final retornou seu `registro_id` original contendo a linha exata da planilha correspondente e o hash SHA-256 verificado da fonte bruta.
+1.  **Confirmação de $H_1$**: A rastreabilidade matemática foi confirmada de forma contínua. Cada fragmento de texto citado na MUE final retornou seu `registro_id` original contendo a linha exata da planilha correspondente e o hash SHA-256 verificado da fonte bruta.
 2.  **Confirmação de $H_2$**: O desacoplamento declarativo por *Context Packages* provou-se extremamente eficiente. A mesma classe base operacionalizou o domínio de música e o domínio de políticas de saúde, alcançando taxas de processamento inferiores a 0.2 segundos.
 3.  **Confirmação de $H_3$**: Expressões regulares de expurgo mascararam de forma cirúrgica todos os e-mails e telefones de usuários contidos no volume bruto de comentários, mantendo a riqueza semântica das reclamações sobre "filas", "som" e "caixas".
 

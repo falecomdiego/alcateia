@@ -109,4 +109,4 @@ Para cada fase concluída, respondemos estritamente às seis perguntas fundament
 
 ## Parecer do Auditor
 
-O pipeline da ALCATEIA atende a **100% dos requisitos de rastreabilidade, linhagem ativa de dados e conformidade da LGPD** exigidos nas Fases de 1 a 4. Todas as perguntas obrigatórias de auditoria foram exaustivamente respondidas e amparadas por evidências materiais físicas de código, documentações científicas e testes de regressão automatizados executados em subsegundos.
+O pipeline da ALCATEIA atende aos requisitos essenciais de rastreabilidade, linhagem ativa de dados e conformidade da LGPD exigidos nas Fases de 1 a 4. Todas as perguntas obrigatórias de auditoria foram respondidas e amparadas por evidências materiais físicas de código, documentações científicas e testes de regressão automatizados executados com alta performance.

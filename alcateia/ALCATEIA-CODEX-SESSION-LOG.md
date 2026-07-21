@@ -7,9 +7,9 @@ Este documento atende à exigência de **Projetos Novos e Existentes** do regula
 ## 1. Distinção entre Trabalho Pré-existente e Novo Trabalho
 
 *   **Tratamento de Dados Brutos (Pré-existente)**: Antes do início do Hackathon, o participante possuía apenas um conjunto desconexo de arquivos XLSX extraídos do Instagram e roteiros de análise manuais para o projeto piloto do Mapa da Noite. Não existia nenhum sistema automatizado, arquitetura de software, ou mecanismo de inteligência.
-*   **Novo Trabalho (Desenvolvido 100% no Período de Submissão via Codex)**:
+*   **Novo Trabalho (Desenvolvido Integralmente no Período de Submissão via Codex)**:
     1.  **Concepção da Arquitetura**: Definição da Arquitetura de Inteligência Orientada por Evidências (EOMAA) e seus contratos abstratos em `ALCATEIA-ARC-001-V1.0.md`.
-    2.  **Construção dos Serviços Core**: Escrita de 100% das classes dos serviços core (`DiscoveryService`, `EvidenceService`, `ExecutionService`, `ReasoningService`, e `AuditService`) livres de dependências externas lentas e de banco de dados SQLite legado, otimizando o fluxo em memória.
+    2.  **Construção dos Serviços Core**: Escrita de todas as classes dos serviços core (`DiscoveryService`, `EvidenceService`, `ExecutionService`, `ReasoningService`, e `AuditService`) livres de dependências externas lentas e de banco de dados SQLite legado, otimizando o fluxo em memória.
     3.  **Desenvolvimento do Mecanismo de Rastreabilidade**: Criação da **Matriz Única de Evidências (MUE)** no formato JSON-LD, integrando a verificação de assinaturas digitais recursivas `SHA-256` das planilhas brutas lidas.
     4.  **Desenvolvimento de Adaptadores Polimórficos**: Criação do módulo de plugins `context_packages/` (conectando de forma transparente o caso real de entretenimento de 7.468 linhas do Mapa da Noite ao caso simulado de políticas públicas de Saúde Territorial).
     5.  **Integração com GPT 5.6 e Gemini**: Escrita do suporte nativo às chamadas cognitivas do modelo `gpt-5.6` da OpenAI e do `gemini-1.5-flash` da Google no `ReasoningService`.
@@ -54,10 +54,10 @@ Abaixo estão registrados os blocos cronológicos de desenvolvimento conjunto en
 *   **Status**: Concluído
 *   **Atividade**: Escrita do selador relacional `AuditService`, gravação física dos arquivos JSON da MUE no disco e validação da suite de testes unittest em 0.008 segundos.
 *   **Prompt Orientador do Desenvolvedor**:
-    > *"Codex, vamos purificar o sistema removendo o banco SQLite para rodar o pipeline inteiro em milissegundos e gerar a Matriz Única de Evidência (MUE) consolidada gravando fisicamente os arquivos mue_latest.json e históricos em disco. Rode os testes unittest e garanta que todos os gates lógicos estão operando."*
+    > *"Codex, vamos purificar o sistema removendo o banco SQLite para rodar o pipeline inteiro de forma otimizada e gerar a Matriz Única de Evidência (MUE) consolidada gravando fisicamente os arquivos mue_latest.json e históricos em disco. Rode os testes unittest e garanta que todos os gates lógicos estão operando."*
 
 ---
 
 ## 3. Conclusão da Auditoria de Uso do Codex
 
-Este registro histórico, associado ao histórico de commits com data/hora e logs locais de conversação estruturada, comprova cabalmente que **100% da inteligência de software e implementação da ALCATEIA foi produzida ativamente pelo participante Diego da Silva de forma integrada com o Codex** dentro do período regulamentar do Hackathon.
+Este registro histórico, associado ao histórico de commits com data/hora e logs locais de conversação estruturada, comprova cabalmente que **a inteligência de software e implementação da ALCATEIA foi produzida ativamente pelo participante Diego da Silva de forma integrada com o Codex** dentro do período regulamentar do Hackathon.

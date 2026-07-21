@@ -230,7 +230,7 @@ O modelo de domínio é ancorado no artefato normativo [`ALCATEIA-DOM-001-V1.0.m
 3. **Observabilidade e Transparência**:
    - Registro de logs detalhados de auditoria em JSON/CSV para cada execução de lote.
 4. **Integridade Criptográfica**:
-   - Validação mandatória de hash SHA-256 em 100% dos arquivos de entrada antes de iniciar qualquer inferência cognitiva.
+   - Validação mandatária de hash SHA-256 nos arquivos de entrada antes de iniciar qualquer inferência cognitiva.
 
 ---
 

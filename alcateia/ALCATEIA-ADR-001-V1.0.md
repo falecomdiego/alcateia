@@ -11,7 +11,7 @@ Este documento reúne os registros oficiais de decisão técnica (*Architecture 
 ## [ADR-0001] Separação Estrita de Raciocínio (Probabilístico) e Execução (Determinístico)
 
 ### Contexto e Problema
-Sistemas baseados exclusivamente em LLMs enfrentam o problema de "alucinação" e inconsistência de processamento de dados (ex.: cálculo de hashes, remoção de registros, filtros de LGPD, contagem de dados). Por outro lado, sistemas 100% determinísticos carecem de flexibilidade cognitiva para compreender gírias de nicho, nuances culturais e gerar recomendações contextuais complexas.
+Sistemas baseados exclusivamente em LLMs enfrentam o problema de "alucinação" e inconsistência de processamento de dados (ex.: cálculo de hashes, remoção de registros, filtros de LGPD, contagem de dados). Por outro lado, sistemas estritamente determinísticos carecem de flexibilidade cognitiva para compreender gírias de nicho, nuances culturais e gerar recomendações contextuais complexas.
 
 ### Decisão de Projeto
 Dividir rigidamente a inteligência do sistema entre dois agentes com papéis mutuamente exclusivos:

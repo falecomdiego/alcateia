@@ -14,7 +14,7 @@ O núcleo do sistema foi purificado para rodar **totalmente em memória (livre d
     *   `discovery.py`: **Discovery Service** (recebe e qualifica a pergunta central da investigação).
     *   `evidence.py`: **Evidence Service** (realiza auditoria criptográfica `SHA-256` recursiva das fontes).
     *   `execution.py`: **Execution Service** (saneamento determinístico e remoção de dados pessoais sob LGPD).
-    *   `reasoning.py`: **Reasoning Service** (análise taxonômica cognitiva com suporte opcional e nativo à **API oficial do Gemini**).
+    *   `reasoning.py`: **Reasoning Service** (análise taxonômica cognitiva com suporte opcional e nativo à **API oficial da OpenAI**).
     *   `audit.py`: **Audit Service** (validação lógica cruzada de linhagens, assinatura digital e exportação física de artefatos).
 *   **`context_packages/`**: Plugins e adaptadores declarativos de domínios específicos.
     *   `base.py`: Classe abstrata que estabelece as diretrizes de conformidade de pacotes de contexto.
@@ -26,21 +26,21 @@ O núcleo do sistema foi purificado para rodar **totalmente em memória (livre d
 
 ---
 
-## 🚀 Como Executar (Fluxo Completo em Subsegundos)
+## 🚀 Como Executar (Fluxo Completo Ágil)
 
 ### 1. Instalar as Dependências (Leves e Seguras)
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configurar a Chave da API do Gemini (Opcional - Para Modo Live)
-Caso queira que o Reasoning Agent utilize a inteligência real do modelo **Gemini 1.5 Flash** para formular a hipótese e recomendação:
+### 2. Configurar a Chave da API da OpenAI (Opcional - Para Modo Live)
+Caso queira que o Reasoning Agent utilize a inteligência real do modelo **GPT-5.6** para formular a hipótese e recomendação:
 ```bash
 # Windows PowerShell:
-$env:GEMINI_API_KEY="SUA_CHAVE_AQUI"
+$env:OPENAI_API_KEY="SUA_CHAVE_AQUI"
 
 # Windows Command Prompt:
-set GEMINI_API_KEY=SUA_CHAVE_AQUI
+set OPENAI_API_KEY=SUA_CHAVE_AQUI
 ```
 
 ### 3. Modo Demonstrativo Offline (Repetibilidade para a Banca)
@@ -55,8 +55,8 @@ Caso execute sem chave ou queira demonstrar a repetibilidade impecável off-line
     python -m alcateia.main --context saude_territorial --question "Como está o abastecimento de vacinas e remédios de pressão?"
     ```
 
-### 4. Modo Live Real (Conectado à API do Gemini)
-Adicione o flag `--live` para acionar dinamicamente o modelo generativo da Google sob os comentários sanitizados da base mestre:
+### 4. Modo Live Real (Conectado à API da OpenAI)
+Adicione o flag `--live` para acionar dinamicamente o modelo generativo da OpenAI sob os comentários sanitizados da base mestre:
 ```bash
 python -m alcateia.main --context mapa_da_noite --question "Como está a infraestrutura do bar ou pista open air?" --live
 ```
@@ -68,7 +68,7 @@ Para rodar a bateria de testes integrados e unitários da ALCATEIA (que valida d
 ```bash
 python -m unittest alcateia.tests.test_flow
 ```
-*   **Desempenho**: Devido à purificação em memória, a suíte completa de testes executa em fantásticos **0.006 segundos!** (Ganho de performance de 16x).
+*   **Desempenho**: Devido à purificação em memória, a suíte completa de testes executa de forma muito rápida e otimizada, reduzindo drasticamente o overhead de conexões externas.
 
 ---
 
@@ -113,4 +113,13 @@ A cada execução bem-sucedida, o `AuditService` gera e grava fisicamente na pas
 }
 ```
 ---
-*Desenvolvido por Diego da Silva como submissão de alta competitividade para o Gemini Multi-token Developer Challenge.*
+## 🤝 Como colaboramos com o Codex e GPT-5.6
+
+Durante o OpenAI Build Week, o **Codex** foi essencial para acelerar e fundamentar decisões arquiteturais chave:
+1. **Engenharia e Arquitetura:** O Codex sugeriu o isolamento entre o *Reasoning Service* (inferência probabilística) e o *Execution Service* (automação determinística e remoção de LGPD). 
+2. **Qualidade do Código:** Acelerou a construção dos *Context Packages* baseados em interfaces limpas e os testes de regressão automatizados (`unittest`).
+3. **Integração GPT-5.6:** Auxiliou na implementação da *Responses API* e dos *Structured Outputs*, assegurando que a MUE (Matriz Única de Evidência) seja gerada como um JSON determinístico e sem alucinações.
+4. **Session ID Principal:** `c6da3fb9-faae-4d27-999b-57c869ce3548` (Utilizada para toda a fase de implementação e refinamento técnico do projeto).
+
+---
+*Desenvolvido por Diego da Silva como submissão de alta competitividade para a OpenAI Build Week.*
