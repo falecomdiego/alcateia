@@ -1,271 +1,387 @@
-/* ==========================================
-   ALCATEIA — ENGINE DE VISUALIZAÇÃO (v1.0)
-   ========================================== */
+const axisFilters = [
+  { label: "Todos", type: "all", value: "all" },
+  { label: "Operação", type: "axis", value: "operacao" },
+  { label: "Experiência", type: "axis", value: "experiencia" },
+  { label: "Sinais complementares com blindagem", type: "axis", value: "blindagem" }
+];
 
-// BASE DE DADOS DO MARCO ZERO (CASOS 1 E 2)
-const domainData = {
-    mapa_da_noite: {
-        total_comentarios: "7.468",
-        lbl_comentarios: "Interações humanas limpas",
-        fontes_count: "30",
-        pii_expurgado: "100%",
-        latencia: "0.18s",
-        badge_modelo: "GPT 5.6",
-        badge_confianca: "Confiança Alta",
-        rec_title: "Ampliar em 30% os caixas móveis e redistribuir pontos de hidratação na pista open air.",
-        rec_hypothesis: "Demonstrado aumento de comentários críticos sobre filas prolongadas no atendimento de bar e escassez de água na pista de dança aberta.",
-        sig_hash: "SHA-256: 4df8b65357efba30d690d5ed47b4b392b0c3b3a844d59e90fa84b1986e2e8fcb",
-        sig_meta: "Assinado eletronicamente por Diego da Silva (Pesquisador-Chefe)",
-        fontes: [
-            { nome: "MDN-RPP01-COL-001.xlsx", hash: "a3f5b721e582d921b8c1..." },
-            { nome: "MDN-RPP01-COL-002.xlsx", hash: "e28d4b901fc38201a09d..." },
-            { nome: "MDN-RPP01-COL-003.xlsx", hash: "f8c5a201bcf392c10a4d..." },
-            { nome: "MDN-RPP01-COL-004.xlsx", hash: "9d3a4c2810fec5b190a4..." },
-            { nome: "MDN-RPP01-COL-005.xlsx", hash: "b20e4d101afc9201d0a5..." },
-            { nome: "MDN-RPP01-COL-006.xlsx", hash: "c8e21a48ffc201a93b4f..." },
-            { nome: "MDN-RPP01-COL-007.xlsx", hash: "20fa3c1b928fcc201b4e..." }
-        ],
-        evidencias: [
-            {
-                arquivo: "MDN-RPP01-COL-001.xlsx",
-                linha: 142,
-                lote: "lote_01",
-                texto: "fiquei mais de 45 minutos na fila do bar do open air... o atendimento estava péssimo e a água acabou antes do show acabar... [PII_EMAIL_REMOVED]"
-            },
-            {
-                arquivo: "MDN-RPP01-COL-003.xlsx",
-                linha: 89,
-                lote: "lote_01",
-                texto: "a pista de dança open air é excelente, mas não tinha nenhum ponto de água ou hidratação por perto, fila do bar impossível [PII_PHONE_REMOVED]"
-            },
-            {
-                arquivo: "MDN-RPP01-COL-006.xlsx",
-                linha: 305,
-                lote: "lote_02",
-                texto: "filas gigantescas para comprar ficha e depois outra fila gigante para pegar a bebida... organização de atendimento falhou feio"
-            }
-        ],
-        pipeline_steps: {
-            1: {
-                title: "Investigação (Discovery Service)",
-                producer: "Discovery Agent (DiscoveryService)",
-                model: "Codex Assistido",
-                script: "alcateia/core/discovery.py",
-                doc: "ALCATEIA-ARC-001-V1.0.md • Gate G0",
-                reproduce: "python -m alcateia.main --context mapa_da_noite --question \"Como está a infraestrutura...\""
-            },
-            2: {
-                title: "Execução (Execution Service — LGPD)",
-                producer: "Saneador de Dados (ExecutionService)",
-                model: "Expressões Regulares",
-                script: "alcateia/core/execution.py",
-                doc: "Regras 1, 2 e 5 do AGENTS.md • Gate G1",
-                reproduce: "Módulo interno chamado automaticamente na execução em memória."
-            },
-            3: {
-                title: "Evidências (Evidence Service)",
-                producer: "Auditor de Origens (EvidenceService)",
-                model: "Auditoria Criptográfica SHA-256",
-                script: "alcateia/core/evidence.py",
-                doc: "Regras de Integridade do Mapa da Noite • Gate G2",
-                reproduce: "python -m unittest alcateia.tests.test_flow"
-            },
-            4: {
-                title: "Recomendação (Reasoning Service)",
-                producer: "Cognitive Agent (ReasoningService)",
-                model: "GPT 5.6 (OpenAI API)",
-                script: "alcateia/core/reasoning.py",
-                doc: "Taxonomia Mestre V1.1 (Congelada) • Gate G3",
-                reproduce: "python -m alcateia.main --context mapa_da_noite --question \"...\" --live"
-            },
-            5: {
-                title: "Auditoria (Audit Service)",
-                producer: "Selador de Linhagem (AuditService)",
-                model: "Assinatura Criptográfica da MUE",
-                script: "alcateia/core/audit.py",
-                doc: "Relatório de Auditoria ALC-AUD-001 • Gate G4",
-                reproduce: "Gera o arquivo físico 'alcateia/output/mue_latest.json' em disco."
-            }
-        }
-    },
-    saude_territorial: {
-        total_comentarios: "2",
-        lbl_comentarios: "Linhas de dados de UBS monitoradas",
-        fontes_count: "2",
-        pii_expurgado: "100%",
-        latencia: "0.11s",
-        badge_modelo: "GPT-5.6-Turbo",
-        badge_confianca: "Confiança Crítica",
-        rec_title: "Remanejar 3 equipes de Clínica Geral para a UBS Central e reforçar os insumos para asma.",
-        rec_hypothesis: "Identificado congestionamento crítico no atendimento pediátrico respiratório durante as semanas de baixa temperatura na UBS Central.",
-        sig_hash: "SHA-256: e8b9f65357efba30d690d5ed47b4b392b0c3b3a844d59e90fa84b1986e2e8e0c",
-        sig_meta: "Assinado eletronicamente por Kacia Oliveira (Revisora Independente)",
-        fontes: [
-            { nome: "hospital_atendimento.xlsx", hash: "d8c1b9201fcf201a09df..." },
-            { nome: "clinica_geral.xlsx", hash: "bc14d9201afc9201d0a5..." }
-        ],
-        evidencias: [
-            {
-                arquivo: "hospital_atendimento.xlsx",
-                linha: 2,
-                lote: "lote_saude_01",
-                texto: "UBS Central sem pediatra de plantão hoje à noite... Fila de nebulização gigante e medicação em falta... [PII_EMAIL_REMOVED]"
-            },
-            {
-                arquivo: "clinica_geral.xlsx",
-                linha: 15,
-                lote: "lote_saude_01",
-                texto: "fila de espera para atendimento infantil de sintomas respiratórios passando de 3 horas na ubs... medicação para asma acabou [PII_PHONE_REMOVED]"
-            }
-        ],
-        pipeline_steps: {
-            1: {
-                title: "Investigação (Discovery Service)",
-                producer: "Discovery Agent (DiscoveryService)",
-                model: "Codex Assistido",
-                script: "alcateia/core/discovery.py",
-                doc: "ALCATEIA-ARC-001-V1.0.md • Gate G0",
-                reproduce: "python -m alcateia.main --context saude_territorial --question \"Mapear gargalos...\""
-            },
-            2: {
-                title: "Execução (Execution Service)",
-                producer: "Saneador de Dados (ExecutionService)",
-                model: "Expressões Regulares",
-                script: "alcateia/core/execution.py",
-                doc: "Regras de Saneamento de Saúde Pública • Gate G1",
-                reproduce: "Filtra dados de pacientes para estrita conformidade da LGPD na Saúde."
-            },
-            3: {
-                title: "Evidências (Evidence Service)",
-                producer: "Auditor de Origens (EvidenceService)",
-                model: "Auditoria Criptográfica SHA-256",
-                script: "alcateia/core/evidence.py",
-                doc: "Tabela Relacional de Integridade • Gate G2",
-                reproduce: "python -m unittest alcateia.tests.test_flow"
-            },
-            4: {
-                title: "Recomendação (Reasoning Service)",
-                producer: "Cognitive Agent (ReasoningService)",
-                model: "GPT-5.6-Turbo (OpenAI API)",
-                script: "alcateia/core/reasoning.py",
-                doc: "Taxonomia de Gargalos Hospitalares • Gate G3",
-                reproduce: "python -m alcateia.main --context saude_territorial --question \"...\" --live"
-            },
-            5: {
-                title: "Auditoria (Audit Service)",
-                producer: "Selador de Linhagem (AuditService)",
-                model: "Assinatura Criptográfica da MUE",
-                script: "alcateia/core/audit.py",
-                doc: "Relatório de Auditoria ALC-AUD-001 • Gate G4",
-                reproduce: "Gera o arquivo físico de MUE na pasta 'alcateia/output/'."
-            }
-        }
-    }
-};
+const operationFields = [
+  "fila",
+  "entrada",
+  "bar",
+  "banheiro",
+  "circulação",
+  "som",
+  "acesso",
+  "estrutura",
+  "organização"
+];
 
-let currentDomain = "mapa_da_noite";
-let activeStep = 1;
+const experienceFields = [
+  "clima",
+  "vibe",
+  "encantamento",
+  "frustração",
+  "acolhimento",
+  "desejo de retorno",
+  "valor percebido",
+  "experiência geral"
+];
 
-// FUNÇÃO PARA TROCAR O DOMÍNIO (ESCALABILIDADE METODOLÓGICA)
-function switchDomain(domain) {
-    currentDomain = domain;
-    
-    // Atualiza botões
-    document.getElementById("btn-caso1").classList.toggle("active", domain === "mapa_da_noite");
-    document.getElementById("btn-caso2").classList.toggle("active", domain === "saude_territorial");
-    
-    // Aplica tema CSS no body
-    document.body.classList.toggle("health-theme", domain === "saude_territorial");
-    
-    // Mostra painel do SoundCloud apenas no Mapa da Noite
-    const soundcloudCard = document.getElementById("soundcloud-card");
-    if (soundcloudCard) {
-        soundcloudCard.style.display = domain === "mapa_da_noite" ? "block" : "none";
-    }
-    
-    // Atualiza Métricas
-    document.getElementById("val-total-comentarios").innerText = domainData[domain].total_comentarios;
-    document.getElementById("lbl-total-comentarios").innerText = domainData[domain].lbl_comentarios;
-    document.getElementById("val-fontes-auditadas").innerText = domainData[domain].fontes_count;
-    document.getElementById("val-pii-expurgado").innerText = domainData[domain].pii_expurgado;
-    document.getElementById("val-latencia").innerText = domainData[domain].latencia;
-    
-    // Atualiza Recomendação Principal
-    document.getElementById("val-badge-modelo").innerText = domainData[domain].badge_modelo;
-    document.getElementById("val-badge-confianca").innerText = domainData[domain].badge_confianca;
-    document.getElementById("val-rec-title").innerText = domainData[domain].rec_title;
-    document.getElementById("val-rec-hypothesis").innerHTML = `<strong>Hipótese Formulada:</strong> ${domainData[domain].rec_hypothesis}`;
-    
-    // Atualiza Selo de Assinatura
-    document.getElementById("val-sig-hash").innerText = domainData[domain].sig_hash;
-    document.getElementById("val-sig-meta").innerText = domainData[domain].sig_meta;
-    
-    // Renderiza Fontes
-    renderSources(domain);
-    
-    // Renderiza Evidências
-    renderEvidences(domain);
-    
-    // Atualiza detalhes do pipeline na etapa ativa
-    showPipelineDetail(activeStep);
+const publicSignals = [
+  {
+    id: "op-entrada",
+    axis: "operacao",
+    axisLabel: "Operação",
+    field: "entrada",
+    title: "Entrada",
+    type: "Sinal operacional agregado",
+    recurrence: 92,
+    reading: "Recorrências indicam a entrada como ponto de atenção no funcionamento da experiência.",
+    care: "Leitura agregada sobre fluxo e chegada, sem atribuição pública de causa."
+  },
+  {
+    id: "op-fila",
+    axis: "operacao",
+    axisLabel: "Operação",
+    field: "fila",
+    title: "Fila",
+    type: "Sinal operacional agregado",
+    recurrence: 76,
+    reading: "Percepções recorrentes apontam fila e tempo de espera como sinais de operação a acompanhar.",
+    care: "A recorrência indica percepção pública, não avaliação automática de agentes."
+  },
+  {
+    id: "op-bar",
+    axis: "operacao",
+    axisLabel: "Operação",
+    field: "bar",
+    title: "Bar",
+    type: "Sinal operacional agregado",
+    recurrence: 64,
+    reading: "Sinais agregados conectam bar, atendimento e ritmo de serviço à experiência percebida.",
+    care: "O dado é apresentado em conjunto e não funciona como comparação entre espaços."
+  },
+  {
+    id: "op-som",
+    axis: "operacao",
+    axisLabel: "Operação",
+    field: "som",
+    title: "Som",
+    type: "Sinal operacional agregado",
+    recurrence: 36,
+    reading: "Percepções sobre som aparecem como sinal operacional ligado à experiência da noite.",
+    care: "A leitura não atribui causa pública a equipe, artista, casa ou marca."
+  },
+  {
+    id: "op-banheiro",
+    axis: "operacao",
+    axisLabel: "Operação",
+    field: "banheiro",
+    title: "Banheiro",
+    type: "Sinal operacional agregado",
+    recurrence: 9,
+    reading: "Comentários agregados indicam banheiro como campo operacional com efeito sobre conforto e circulação.",
+    care: "A recorrência é baixa e deve ser lida com cuidado de exposição."
+  },
+  {
+    id: "op-acesso",
+    axis: "operacao",
+    axisLabel: "Operação",
+    field: "acesso",
+    title: "Acesso",
+    type: "Sinal operacional agregado",
+    recurrence: 9,
+    reading: "Acesso aparece como sinal agregado associado à chegada e orientação do público.",
+    care: "Sinal público agregado, sem inferência acusatória e sem individualização."
+  },
+  {
+    id: "ex-desejo-retorno",
+    axis: "experiencia",
+    axisLabel: "Experiência",
+    field: "desejo de retorno",
+    title: "Desejo de retorno",
+    type: "Sinal experiencial agregado",
+    recurrence: 200,
+    reading: "A vontade de retornar aparece como percepção forte na leitura agregada da rodada.",
+    care: "O sinal indica tendência de percepção, não medida totalizante da cena."
+  },
+  {
+    id: "ex-encantamento",
+    axis: "experiencia",
+    axisLabel: "Experiência",
+    field: "encantamento",
+    title: "Encantamento",
+    type: "Sinal experiencial agregado",
+    recurrence: 62,
+    reading: "Encantamento aparece ligado a surpresa positiva, memória e brilho percebido.",
+    care: "A leitura preserva o caráter subjetivo das percepções públicas."
+  },
+  {
+    id: "ex-frustracao",
+    axis: "experiencia",
+    axisLabel: "Experiência",
+    field: "frustração",
+    title: "Frustração",
+    type: "Sinal experiencial agregado",
+    recurrence: 48,
+    reading: "Frustração aparece como percepção vivida associada a expectativas e atritos da experiência.",
+    care: "Recorrência não é acusação e não identifica agentes públicos."
+  },
+  {
+    id: "ex-acolhimento",
+    axis: "experiencia",
+    axisLabel: "Experiência",
+    field: "acolhimento",
+    title: "Acolhimento",
+    type: "Sinal experiencial agregado",
+    recurrence: 28,
+    reading: "Acolhimento aparece como sinal de pertencimento, recepção e conforto social.",
+    care: "O sinal é agregado e não substitui escutas qualitativas aprofundadas."
+  },
+  {
+    id: "ex-valor",
+    axis: "experiencia",
+    axisLabel: "Experiência",
+    field: "valor percebido",
+    title: "Valor percebido",
+    type: "Sinal experiencial agregado",
+    recurrence: 7,
+    reading: "Valor percebido aparece como relação entre expectativa, entrega e satisfação pública.",
+    care: "A baixa recorrência exibida pede leitura cautelosa e sem afirmação forte."
+  },
+  {
+    id: "ex-geral",
+    axis: "experiencia",
+    axisLabel: "Experiência",
+    field: "experiência geral",
+    title: "Experiência geral",
+    type: "Sinal experiencial agregado",
+    recurrence: 4,
+    reading: "Sinais gerais ajudam a contextualizar a vivência sem reduzir a noite a uma nota única.",
+    care: "Campo de leitura ampla, usado apenas como percepção pública agregada."
+  },
+  {
+    id: "bl-cuidado",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "saúde, cuidado e segurança",
+    title: "Cuidado e segurança",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Tema complementar tratado apenas como contexto de cuidado, sem exposição de pessoas ou situações identificáveis.",
+    care: "Não há atribuição pública de causa e não há individualização de agentes."
+  },
+  {
+    id: "bl-curadoria",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "histórico-musical e curatorial",
+    title: "Histórico-musical e curatorial",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Percepções musicais e curatoriais aparecem apenas como apoio de contexto da experiência.",
+    care: "O painel não compara artistas, casas, festas ou marcas."
+  },
+  {
+    id: "bl-reputacao",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "reputação e decisão estratégica",
+    title: "Reputação e decisão estratégica",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Sinais reputacionais entram apenas como leitura agregada de percepção pública.",
+    care: "Sem leitura acusatória e sem individualização de organizações."
+  },
+  {
+    id: "bl-economia",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "economia da experiência",
+    title: "Economia da experiência",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Percepções sobre valor e entrega aparecem como contexto, sem transformar comentários em juízo público.",
+    care: "Sinal complementar, agregado e sem conclusão forte sobre agentes."
+  },
+  {
+    id: "bl-bastidores",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "trabalho, bastidores e cadeia produtiva",
+    title: "Trabalho e bastidores",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Temas de bastidores ficam protegidos e aparecem apenas quando ajudam a contextualizar a leitura pública.",
+    care: "Sem exposição de equipes, trabalhadores, produtores ou organizações."
+  },
+  {
+    id: "bl-sociocultural",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "sociocultural e linguística",
+    title: "Sociocultural e linguística",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Termos e códigos da cena são tratados com cautela, sem leitura pública forte.",
+    care: "Uso condicionado para evitar interpretação indevida ou exposição simbólica."
+  },
+  {
+    id: "bl-governanca",
+    axis: "blindagem",
+    axisLabel: "Sinais complementares com blindagem",
+    field: "governança, ética e proteção de dados",
+    title: "Governança e dados",
+    type: "Sinal complementar com blindagem",
+    recurrence: null,
+    reading: "Governança aparece como transparência metodológica sobre anonimização, agregação e cuidado de exposição.",
+    care: "Bloco de apoio, não eixo narrativo principal."
+  }
+];
+
+let activeFilter = { type: "all", value: "all", label: "Todos os sinais agregados" };
+
+const $ = (selector, root = document) => root.querySelector(selector);
+
+function formatNumber(value) {
+  if (value === null || value === undefined) return "recorrência não exibida";
+  return new Intl.NumberFormat("pt-BR").format(value);
 }
 
-// RENDERIZA FONTES E HASHES (GOVERNANÇA)
-function renderSources(domain) {
-    const container = document.getElementById("sources-list-container");
-    container.innerHTML = "";
-    
-    domainData[domain].fontes.forEach(f => {
-        const row = document.createElement("div");
-        row.className = "source-row";
-        row.innerHTML = `
-            <span class="source-name" title="${f.nome}">📄 ${f.nome}</span>
-            <span class="source-hash">${f.hash}</span>
-            <span class="text-green font-weight-bold">✓ VÁLIDO</span>
-        `;
-        container.appendChild(row);
+function buttonMarkup(item, extraClass = "") {
+  return `<button type="button" class="filter-button ${extraClass}" data-filter-type="${item.type}" data-filter-value="${item.value}">${item.label}</button>`;
+}
+
+function renderFilters() {
+  $("#axis-filters").innerHTML = axisFilters.map((item) => buttonMarkup(item)).join("");
+  $("#operation-filters").innerHTML = operationFields
+    .map((field) => buttonMarkup({ label: field, type: "field", value: field }, "field-filter"))
+    .join("");
+  $("#experience-filters").innerHTML = experienceFields
+    .map((field) => buttonMarkup({ label: field, type: "field", value: field }, "field-filter"))
+    .join("");
+
+  document.querySelectorAll(".filter-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeFilter = {
+        type: button.dataset.filterType,
+        value: button.dataset.filterValue,
+        label: button.textContent.trim()
+      };
+      renderDashboard();
     });
+  });
 }
 
-// RENDERIZA FRAGMENTOS DE EVIDÊNCIA (RASTREABILIDADE)
-function renderEvidences(domain) {
-    const container = document.getElementById("evidencies-list-container");
-    container.innerHTML = "";
-    
-    domainData[domain].evidencias.forEach(e => {
-        const item = document.createElement("div");
-        item.className = "evidence-item";
-        item.innerHTML = `
-            <div class="evidence-meta">
-                <span>📁 Origem: ${e.arquivo} • Linha: ${e.linha}</span>
-                <span class="badge badge-green">${e.lote.toUpperCase()}</span>
-            </div>
-            <p class="evidence-text">"${e.texto}"</p>
-        `;
-        container.appendChild(item);
+function matchesFilter(signal) {
+  if (activeFilter.type === "all") return true;
+  if (activeFilter.type === "axis") return signal.axis === activeFilter.value;
+  if (activeFilter.type === "field") return signal.field === activeFilter.value;
+  return true;
+}
+
+function filteredSignals() {
+  return publicSignals.filter(matchesFilter);
+}
+
+function renderCounts(signals) {
+  $("#visible-count").textContent = formatNumber(signals.length);
+  $("#active-filter-label").textContent = activeFilter.type === "all"
+    ? "Todos os sinais agregados"
+    : `Filtro ativo: ${activeFilter.label}`;
+  $("#operation-count").textContent = formatNumber(publicSignals.filter((signal) => signal.axis === "operacao").length);
+  $("#experience-count").textContent = formatNumber(publicSignals.filter((signal) => signal.axis === "experiencia").length);
+  $("#protected-count").textContent = formatNumber(publicSignals.filter((signal) => signal.axis === "blindagem").length);
+}
+
+function renderActiveButtons() {
+  document.querySelectorAll(".filter-button").forEach((button) => {
+    const active = button.dataset.filterType === activeFilter.type && button.dataset.filterValue === activeFilter.value;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+function signalCard(signal) {
+  const recurrence = signal.recurrence === null || signal.recurrence === undefined
+    ? "Recorrência não exibida nesta versão"
+    : `${formatNumber(signal.recurrence)} recorrências agregadas`;
+
+  return `
+    <article class="evidence-card" data-axis="${signal.axis}" data-field="${signal.field}">
+      <div class="card-kicker">${signal.axisLabel}</div>
+      <h3>${signal.title}</h3>
+      <dl>
+        <div><dt>Tipo de sinal</dt><dd>${signal.type}</dd></div>
+        <div><dt>Quantidade</dt><dd>${recurrence}</dd></div>
+      </dl>
+      <p>${signal.reading}</p>
+      <p class="care-note">${signal.care}</p>
+      <p class="cause-note">Sem atribuição pública de causa.</p>
+    </article>
+  `;
+}
+
+function renderEvidence(signals) {
+  const grid = $("#evidence-grid");
+  const empty = $("#empty-state");
+  $("#result-status").textContent = `${formatNumber(signals.length)} sinais exibidos`;
+  grid.innerHTML = signals.map(signalCard).join("");
+  empty.hidden = signals.length > 0;
+}
+
+function renderAxisGrid(selector, axis) {
+  const rows = publicSignals.filter((signal) => signal.axis === axis);
+  $(selector).innerHTML = rows.map(signalCard).join("");
+}
+
+function renderDashboard() {
+  const signals = filteredSignals();
+  renderCounts(signals);
+  renderActiveButtons();
+  renderEvidence(signals);
+}
+
+function setupNavigation() {
+  const navLinks = Array.from(document.querySelectorAll(".desktop-nav a, .mobile-nav a"));
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  const setActiveLink = (id) => {
+    navLinks.forEach((link) => {
+      link.toggleAttribute("aria-current", link.getAttribute("href") === `#${id}`);
     });
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) setActiveLink(visible.target.id);
+      },
+      { rootMargin: "-20% 0px -65% 0px", threshold: [0.12, 0.35, 0.6] }
+    );
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", link.getAttribute("href"));
+    });
+  });
 }
 
-// DETALHE DO TIMELINE (CONFIANÇA)
-function showPipelineDetail(step) {
-    activeStep = step;
-    
-    // Atualiza classes do timeline
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById(`time-step${i}`).classList.toggle("active", i === step);
-    }
-    
-    const stepData = domainData[currentDomain].pipeline_steps[step];
-    
-    document.getElementById("detail-title").innerText = stepData.title;
-    document.getElementById("detail-producer").innerText = stepData.producer;
-    document.getElementById("detail-model").innerText = stepData.model;
-    document.getElementById("detail-script").innerHTML = `<code>${stepData.script}</code>`;
-    document.getElementById("detail-doc").innerText = stepData.doc;
-    document.getElementById("detail-reproduce").innerHTML = `<code>${stepData.reproduce}</code>`;
-}
-
-// INICIALIZAÇÃO DA PÁGINA
-window.onload = function() {
-    switchDomain("mapa_da_noite");
-};
+renderFilters();
+renderAxisGrid("#operation-grid", "operacao");
+renderAxisGrid("#experience-grid", "experiencia");
+renderAxisGrid("#protected-grid", "blindagem");
+renderDashboard();
+setupNavigation();

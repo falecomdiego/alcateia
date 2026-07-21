@@ -122,4 +122,9 @@ Durante o OpenAI Build Week, o **Codex** foi essencial para acelerar e fundament
 4. **Session ID Principal:** `c6da3fb9-faae-4d27-999b-57c869ce3548` (Utilizada para toda a fase de implementação e refinamento técnico do projeto).
 
 ---
+## 🏛️ Fechamento Institucional
+
+Nosso compromisso com a **ALCATEIA** é entregar Inteligência de Decisão sem caixa-preta. Desenvolvemos uma arquitetura institucional baseada em governança da informação, proteção de dados, rastreabilidade e produção de evidências auditáveis. Cada recomendação, indicador ou hipótese produzida pelo sistema pode ser rastreada até suas fontes primárias, permitindo transparência metodológica, reprodutibilidade das análises e conformidade com requisitos legais e institucionais para governos, organizações e empresas.
+
+---
 *Desenvolvido por Diego da Silva como submissão de alta competitividade para a OpenAI Build Week.*
