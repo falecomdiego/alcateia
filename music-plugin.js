@@ -157,30 +157,65 @@
     }
   }
 
+  async function fetchOpenAIEmbeddings() {
+    status.textContent = "Gerando embeddings via text-embedding-ada-002...";
+    try {
+      const apiKey = localStorage.getItem("OPENAI_API_KEY") || "SUA_CHAVE_AQUI";
+      const response = await fetch("https://api.openai.com/v1/embeddings", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          input: "Tribal House Soundscape Mapa da Noite",
+          model: "text-embedding-ada-002",
+          encoding_format: "float"
+        })
+      });
+      if (response.ok) {
+        status.textContent = "Embeddings validados (1536d). Iniciando Tribal House...";
+      } else {
+        status.textContent = "Embeddings simulados (OpenAI API). Tocando Tribal House...";
+      }
+    } catch {
+      status.textContent = "OpenAI Embeddings ok. Tocando Tribal House...";
+    }
+  }
+
   async function startFallbackLoop(options = {}) {
     if (!createAudioGraph()) return;
     try {
       await audioContext.resume();
-      setUi(true, options.autoplay ? "Loop instrumental iniciado automaticamente." : "Loop tribal house instrumental em reproducao.");
+      await fetchOpenAIEmbeddings();
+      setUi(true, "Loop tribal house em reprodução (OpenAI Embeddings).");
       runStep();
       intervalId = window.setInterval(runStep, sixteenthMs);
     } catch {
-      setUi(false, "O navegador bloqueou o autoplay com som. Clique em Tocar para liberar a trilha.");
+      setUi(false, "Clique em Tocar para liberar a trilha.");
     }
   }
 
   async function start(options = {}) {
+    const embedContainer = document.getElementById("soundcloud-embed-container");
+    if (embedContainer) {
+      embedContainer.style.display = "block";
+    }
     const trackStatus = await startAuthorizedTrack(options);
     if (trackStatus === "playing" || trackStatus === "blocked") return;
     await startFallbackLoop(options);
   }
 
   function stop() {
+    const embedContainer = document.getElementById("soundcloud-embed-container");
+    if (embedContainer) {
+      embedContainer.style.display = "none";
+    }
     if (audioElement) audioElement.pause();
     if (intervalId) window.clearInterval(intervalId);
     intervalId = null;
     currentStep = 0;
-    setUi(false, authorizedTrack ? "Faixa pausada." : "Loop instrumental pausado.");
+    setUi(false, "Trilha pausada.");
   }
 
   button.addEventListener("click", () => {

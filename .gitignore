@@ -8,7 +8,9 @@ __pycache__/
 *.key
 *.secret
 
-# Rodada inicial: dados brutos e derivados que podem conter identificadores
+# Pastas legadas da rodada inicial (Ignoradas para purificação do repositório)
+00_contexto_mestre/
+01_diagnosticos_tecnicos/
 02_xlsx_brutos_extensao_chrome/
 03_lotes_processamento/
 04_bases_tratadas_por_lote/
@@ -17,17 +19,19 @@ __pycache__/
 07_classificacao_pilar2_por_lote/
 08_pln_pilar3_por_lote/
 09_matriz_resolutiva_por_lote/
-10_consolidacao_rodada_inicial/*.csv
-10_consolidacao_rodada_inicial/*.xlsx
-11_painel_final_rodada_inicial/*.csv
-11_painel_final_rodada_inicial/*.xlsx
-12_leitura_executiva_final/*.xlsx
-14_dashboard_visual_rodada_inicial/data/
-15_dashboard_publico_rodada_inicial/data/
-16_teste_agente_de_qualidade_fluxo_completo/*.xlsx
-17_teste_agentes_1_2_fluxo_completo/*.xlsx
-18_exemplos_praticos_evidencias_recorrentes/**/*.xlsx
+10_consolidacao_rodada_inicial/
+11_painel_final_rodada_inicial/
+12_leitura_executiva_final/
+13_entrega_final_rodada_inicial/
+14_dashboard_visual_rodada_inicial/
+15_dashboard_publico_rodada_inicial/
+16_teste_agente_de_qualidade_fluxo_completo/
+17_teste_agentes_1_2_fluxo_completo/
+18_exemplos_praticos_evidencias_recorrentes/
 19_filtro_mencoes_van_muller/
+pipeline_mdn_v2/
+rules/
+scripts/
 links.txt
 
 # MDN-RPP01: somente modelos e documentação podem ser versionados

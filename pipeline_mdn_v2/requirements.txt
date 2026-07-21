@@ -1,3 +1,0 @@
-# O pipeline MDN V2 usa somente a biblioteca padrão do Python.
-# Não há dependências externas na versão 0.1.0.
-
