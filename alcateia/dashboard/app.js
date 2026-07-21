@@ -94,7 +94,7 @@ const domainData = {
         fontes_count: "2",
         pii_expurgado: "100%",
         latencia: "0.11s",
-        badge_modelo: "Gemini 1.5 Flash",
+        badge_modelo: "GPT-5.6-Turbo",
         badge_confianca: "Confiança Crítica",
         rec_title: "Remanejar 3 equipes de Clínica Geral para a UBS Central e reforçar os insumos para asma.",
         rec_hypothesis: "Identificado congestionamento crítico no atendimento pediátrico respiratório durante as semanas de baixa temperatura na UBS Central.",
@@ -146,7 +146,7 @@ const domainData = {
             4: {
                 title: "Recomendação (Reasoning Service)",
                 producer: "Cognitive Agent (ReasoningService)",
-                model: "Gemini 1.5 Flash (Google API)",
+                model: "GPT-5.6-Turbo (OpenAI API)",
                 script: "alcateia/core/reasoning.py",
                 doc: "Taxonomia de Gargalos Hospitalares • Gate G3",
                 reproduce: "python -m alcateia.main --context saude_territorial --question \"...\" --live"

@@ -5,12 +5,6 @@ from ..context_packages.base import BaseContextPackage
 
 # Importacao segura dos SDKs para garantir resiliencia caso os pacotes nao estejam instalados
 try:
-    import google.generativeai as genai
-    HAS_GEMINI_SDK = True
-except ImportError:
-    HAS_GEMINI_SDK = False
-
-try:
     from openai import OpenAI
     HAS_OPENAI_SDK = True
 except ImportError:
@@ -137,26 +131,10 @@ class ReasoningService:
                     )
                     report_data = json.loads(response.choices[0].message.content.strip())
                     report_data["distribuicao_taxonomica"] = counts_by_eixo
-                    report_data["modelo_utilizado"] = "GPT 5.6 (Responses API / Structured Outputs)"
+                    report_data["modelo_utilizado"] = "GPT-5.6 (Responses API / Structured Outputs)"
                     return report_data
                 except Exception:
                     # Se falhar ou modelo não estiver mapeado no endpoint de teste, tenta o fallback
-                    pass
-
-            # 2. Alternativa: Chamada ao Gemini 1.5 Flash se houver chave e SDK
-            if gemini_key and HAS_GEMINI_SDK:
-                try:
-                    genai.configure(api_key=gemini_key)
-                    model = genai.GenerativeModel("gemini-1.5-flash")
-                    response = model.generate_content(
-                        prompt_instrucoes, 
-                        generation_config={"response_mime_type": "application/json"}
-                    )
-                    report_data = json.loads(response.text.strip())
-                    report_data["distribuicao_taxonomica"] = counts_by_eixo
-                    report_data["modelo_utilizado"] = "Gemini 1.5 Flash"
-                    return report_data
-                except Exception:
                     pass
 
         # MODO DEMONSTRATIVO OFFLINE (Garante repetibilidade impecável para a banca)
