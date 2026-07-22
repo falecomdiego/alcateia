@@ -183,44 +183,12 @@
     setUi(false, authorizedTrack ? "Faixa pausada." : "Loop instrumental pausado.");
   }
 
-  async function runEmbeddings() {
-    status.textContent = "Gerando embeddings via text-embedding-ada-002...";
-    try {
-      const apiKey = localStorage.getItem("OPENAI_API_KEY") || "SUA_CHAVE_AQUI";
-      const response = await fetch("https://api.openai.com/v1/embeddings", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          input: "SÃO PAULO · CENA ELETRÔNICA E TRIBAL HOUSE",
-          model: "text-embedding-ada-002",
-          encoding_format: "float"
-        })
-      });
-      if (response.ok) {
-        status.textContent = "Vetor de Embeddings validado (OpenAI). Tocando Tribal House...";
-      } else {
-        status.textContent = "Embeddings OpenAI processados. Tocando Tribal House...";
-      }
-    } catch {
-      status.textContent = "OpenAI Embeddings OK. Tocando Tribal House...";
-    }
-  }
-
-  button.addEventListener("click", async () => {
-    const scPlayer = document.getElementById("sc-player");
-    if (scPlayer) {
-      scPlayer.style.display = scPlayer.style.display === "none" ? "block" : "none";
-    }
-
+  button.addEventListener("click", () => {
     if (isPlaying) {
       stop();
       return;
     }
 
-    await runEmbeddings();
     start();
   });
 
