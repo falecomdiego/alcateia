@@ -1,219 +1,723 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa da Noite — Painel de Inteligência Coletiva</title>
-    
+    <title>Mapa da Noite - Inteligência Coletiva da Vida Noturna de São Paulo</title>
+    <meta name="description" content="O Mapa da Noite transforma percepções dispersas em uma leitura coletiva, rastreável e útil sobre a vida noturna de São Paulo.">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="index.css?v=4">
+    <!-- Global Error Listener for debugging -->
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Open Sans"', 'Google Sans', 'system-ui', 'sans-serif'],
-                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
-                    },
-                    colors: {
-                        mnYellow: '#FACC15',
-                        mnGrafiteDark: '#121212',
-                        mnGrafiteCard: '#1E1E1E',
-                        mnNavyDark: '#0A111E',
-                        mnNavyCard: '#0F172A',
-                        mnBorder: '#2A2E37'
-                    }
-                }
-            }
-        }
+        window.addEventListener('error', function(e) {
+            const errorDiv = document.createElement('div');
+            errorDiv.style.position = 'fixed';
+            errorDiv.style.top = '0';
+            errorDiv.style.left = '0';
+            errorDiv.style.right = '0';
+            errorDiv.style.backgroundColor = '#EF4444';
+            errorDiv.style.color = '#FFFFFF';
+            errorDiv.style.padding = '1.5rem';
+            errorDiv.style.zIndex = '99999';
+            errorDiv.style.fontFamily = 'monospace';
+            errorDiv.style.fontSize = '0.9rem';
+            errorDiv.style.lineHeight = '1.4';
+            errorDiv.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
+            errorDiv.innerHTML = '<strong>JS Error:</strong> ' + e.message + ' <br><strong>File:</strong> ' + e.filename + ' L:' + e.lineno + ':' + e.colno + '<br><strong>Stack:</strong> ' + (e.error ? e.error.stack : 'N/A');
+            document.body.appendChild(errorDiv);
+        });
     </script>
-    <style>
-        body { background-color: #0A111E; color: #E2E8F0; font-family: 'Google Sans', 'Open Sans', sans-serif; }
-        .bg-grid-pattern {
-            background-image: radial-gradient(#2A2E37 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-    </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 bg-grid-pattern">
-
-    <!-- CABEÇALHO DO PAINEL MAPA DA NOITE -->
-    <header class="max-w-7xl mx-auto w-full bg-mnNavyCard/90 border border-mnBorder rounded-xl p-6 mb-8 backdrop-blur shadow-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div>
-            <div class="flex items-center gap-3">
-                <span class="bg-mnYellow text-black text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider">MAPA DA NOITE</span>
-                <span class="text-xs text-slate-400 font-medium">Recorte Territorial: São Paulo (Cena Eletrônica / Tribal House)</span>
+<body>
+    <!-- Sticky Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <circle cx="12" cy="12" r="6" stroke="var(--color-primary)" stroke-width="1.5" fill="none" class="pulse-orbit"/>
+                    <circle cx="12" cy="12" r="2" fill="var(--color-primary)"/>
+                </svg>
+                <span class="logo-text">Mapa da <span>Noite</span></span>
             </div>
-            <h1 class="text-3xl md:text-4xl font-extrabold text-white mt-3 tracking-tight">PAINEL MARCO ZERO</h1>
-            <p class="text-sm text-slate-300 mt-1">Plataforma de Inteligência Coletiva da Vida Noturna &bull; Nova Rodada (30 Fontes Integradas)</p>
-        </div>
-        
-        <div class="bg-mnGrafiteDark/80 border border-mnBorder p-4 rounded-lg text-left md:text-right w-full md:w-auto">
-            <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Validador Humano Principal</p>
-            <p class="text-base font-bold text-white mt-0.5">Diego Silva</p>
-            <div class="flex items-center md:justify-end gap-2 mt-1">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-xs font-mono text-mnYellow">Chancela RASI/RACI Ativa</span>
+            <nav class="nav-menu">
+                <a href="#projeto" class="nav-link">O projeto</a>
+                <a href="#evidencias" class="nav-link">Evidências</a>
+                <a href="#metodo" class="nav-link">Método</a>
+                <a href="#principios" class="nav-link">Princípios</a>
+                <a href="#avaliacao" class="nav-link">Acesso & Teste</a>
+                <div class="lang-toggle">
+                    <button class="lang-btn active" data-lang="pt">PT</button>
+                    <span class="lang-divider">|</span>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </nav>
+            <div class="header-badge">
+                <span class="badge-dot" style="background-color: #10b981;"></span> Marco Zero (MDN-RPP01)
             </div>
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL DO PAINEL -->
-    <main class="max-w-7xl mx-auto w-full flex-1 space-y-8">
-        
-        <!-- CARDS DE STATUS E MÉTRICAS OPERACIONAIS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="bg-mnGrafiteCard border border-mnBorder p-6 rounded-xl shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-16 h-16 bg-mnYellow/10 rounded-bl-full"></div>
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Fontes Monitoradas</p>
-                <p class="text-4xl font-black text-white mt-2">30 <span class="text-mnYellow text-xl">/ 30</span></p>
-                <p class="text-xs text-emerald-400 font-medium mt-2 flex items-center gap-1">&check; Nova Rodada Integrada</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-gradient-bg"></div>
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-tag">
+                        <span class="tag-pin"></span> São Paulo · Cena Eletrônica e Tribal House
+                    </div>
+                    <h1 class="hero-title">
+                        O que a noite revela quando os comentários deixam de ser <span class="highlight-text">ruído?</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        O Mapa da Noite é uma plataforma de inteligência coletiva da vida noturna, criada para transformar comentários, avaliações, relatos e registros públicos em evidências sobre experiências, comportamentos, percepções, silêncios, riscos e oportunidades relacionados a festas, eventos, territórios e públicos. O projeto reúne coleta, organização documental, limpeza de bases, classificação temática, análise de padrões, leitura sociocultural, análise de experiência, produção de painéis e comunicação pública dos resultados.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#evidencias" class="btn btn-primary">
+                            Ver o recorte exploratório
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                        </a>
+                        <a href="#metodo" class="btn btn-secondary">
+                            Entender o percurso
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="radar-container">
+                        <div class="radar-header">
+                            <span class="radar-title">MARCO ZERO (RPP01)</span>
+                            <span class="radar-status" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">VALIDADO</span>
+                        </div>
+                        <div class="radar-canvas-wrapper">
+                            <canvas id="radarCanvas"></canvas>
+                            <!-- Interactive Tooltip Overlay -->
+                            <div id="radarTooltip" class="radar-tooltip">
+                                <p class="tooltip-id">#OBS-000</p>
+                                <p class="tooltip-text">Passe o mouse pelos pontos do radar para escutar a noite...</p>
+                                <span class="tooltip-meta">Categoria</span>
+                            </div>
+                        </div>
+                        <div class="radar-footer">
+                            <span class="radar-date"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> POSTS: 01—30 JUN 2026</span>
+                            <span class="radar-aggregate" title="Extração e Auditoria executadas em 20-21/07/2026"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z"/></svg> AUDITADO: 20—21 JUL 2026</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="bg-mnGrafiteCard border border-mnBorder p-6 rounded-xl shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-16 h-16 bg-mnYellow/10 rounded-bl-full"></div>
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Status do Pipeline</p>
-                <p class="text-2xl font-bold text-mnYellow mt-3">CONSOLIDAÇÃO</p>
-                <p class="text-xs text-slate-400 font-medium mt-2">Sanitização LGPD & MUE Ativa</p>
+            <!-- Decorative wave or visual bottom divider -->
+            <div class="hero-bars-divider">
+                <div class="divider-bar" style="height: 20%"></div>
+                <div class="divider-bar" style="height: 40%"></div>
+                <div class="divider-bar" style="height: 60%"></div>
+                <div class="divider-bar" style="height: 80%"></div>
+                <div class="divider-bar" style="height: 100%"></div>
+                <div class="divider-bar" style="height: 70%"></div>
+                <div class="divider-bar" style="height: 50%"></div>
+                <div class="divider-bar" style="height: 30%"></div>
             </div>
+        </section>
 
-            <div class="bg-mnGrafiteCard border border-mnBorder p-6 rounded-xl shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-16 h-16 bg-red-500/10 rounded-bl-full"></div>
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Tensão Operacional</p>
-                <p class="text-2xl font-bold text-red-400 mt-3">INFRAESTRUTURA</p>
-                <p class="text-xs text-slate-400 font-medium mt-2">Acessos e Pontos de Hidratação</p>
-            </div>
-
-            <div class="bg-mnGrafiteCard border border-mnBorder p-6 rounded-xl shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full"></div>
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Qualidade da Leitura</p>
-                <p class="text-2xl font-bold text-emerald-400 mt-3">AUDITADA</p>
-                <p class="text-xs text-slate-400 font-medium mt-2">Taxonomia Mestre V1.1.0</p>
-            </div>
-        </div>
-
-        <!-- TAXONOMIA MESTRE E MATRIZ ÚNICA DE EVIDÊNCIAS (MUE) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <div class="bg-mnGrafiteCard border border-mnBorder p-6 rounded-xl space-y-6 shadow-xl">
-                <div class="flex justify-between items-center border-b border-mnBorder pb-4">
-                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <span class="w-3 h-3 bg-mnYellow rounded-full"></span> Taxonomia Mestre
+        <!-- Section 1: O Projeto -->
+        <section id="projeto" class="section-projeto">
+            <div class="container grid-2">
+                <div class="projeto-title-area">
+                    <span class="section-number">01 / O PROJETO</span>
+                    <h2 class="section-title">
+                        Não é um guia de festas. É uma <span class="gradient-text-gold">plataforma de inteligência coletiva.</span>
                     </h2>
-                    <span class="text-xs bg-mnNavyDark border border-mnYellow/30 text-mnYellow px-2.5 py-1 rounded-full font-mono">v1.1.0</span>
                 </div>
-                
-                <div class="space-y-5">
-                    <div>
-                        <div class="flex justify-between text-sm font-semibold mb-1.5">
-                            <span class="text-slate-200">Operação & Infraestrutura Urbana</span>
-                            <span class="text-mnYellow font-mono">42%</span>
-                        </div>
-                        <div class="w-full bg-mnNavyDark h-2.5 rounded-full overflow-hidden border border-mnBorder">
-                            <div class="bg-mnYellow h-full rounded-full" style="width: 42%"></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-sm font-semibold mb-1.5">
-                            <span class="text-slate-200">Saúde, Redução de Danos & Segurança</span>
-                            <span class="text-slate-400 font-mono">28%</span>
-                        </div>
-                        <div class="w-full bg-mnNavyDark h-2.5 rounded-full overflow-hidden border border-mnBorder">
-                            <div class="bg-slate-400 h-full rounded-full" style="width: 28%"></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-sm font-semibold mb-1.5">
-                            <span class="text-slate-200">Economia da Experiência & Reputação</span>
-                            <span class="text-slate-400 font-mono">18%</span>
-                        </div>
-                        <div class="w-full bg-mnNavyDark h-2.5 rounded-full overflow-hidden border border-mnBorder">
-                            <div class="bg-slate-500 h-full rounded-full" style="width: 18%"></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-sm font-semibold mb-1.5">
-                            <span class="text-slate-200">Dimensão Sociocultural & Linguística</span>
-                            <span class="text-slate-400 font-mono">12%</span>
-                        </div>
-                        <div class="w-full bg-mnNavyDark h-2.5 rounded-full overflow-hidden border border-mnBorder">
-                            <div class="bg-slate-600 h-full rounded-full" style="width: 12%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-mnNavyDark/80 border border-mnYellow/30 rounded-lg mt-6 space-y-2">
-                    <p class="text-xs font-bold text-mnYellow uppercase tracking-wider flex items-center gap-1.5">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                        Sinal de Impacto Territorial (SP)
+                <div class="projeto-desc-area">
+                    <p class="lead-text">
+                        O Mapa da Noite observa comentários públicos, identifica padrões recorrentes e organiza evidências sobre a cena eletrônica e tribal house de São Paulo.
                     </p>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Redistribuição de acessos e ampliação dos pontos de hidratação na cena noturna reduzem a percepção negativa sobre gargalos operacionais.
+                    <p class="body-text">
+                        O foco não é expor pessoas ou avaliar experiências individuais. Está em compreender o que se repete, o que muda e o que a conversa coletiva pode revelar sobre pertencimento, operação, território e cultura.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="container features-row">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                    </div>
+                    <h3>Padrões Coletivos</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                    </div>
+                    <h3>Evidências Auditáveis</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                    </div>
+                    <h3>Privacidade por Princípio</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scale / Metrics Banner (Gold Banner) -->
+        <section class="metrics-banner">
+            <div class="container">
+                <div class="metrics-header">
+                    <div class="metrics-header-text">
+                        <p class="metrics-lead">Uma leitura começa pela escala. Ganha sentido pela interpretação.</p>
+                        <p class="metrics-sublead" style="font-size: 0.85rem !important; color: #14532D !important; font-weight: 700 !important; font-style: italic !important; line-height: 1.6 !important; margin-top: 0.25rem !important;">Esta rodada de Marco Zero (MDN-RPP01) investiga a percepção de frequentadores, artistas e trabalhadores sobre posts publicados de 1º a 30 de Junho de 2026, com extrações e auditoria técnica de dados executadas em 20 e 21 de Julho de 2026.</p>
+                    </div>
+                    <span class="metrics-badge" style="background-color: #0F172A !important; color: #FFFFFF !important; padding: 0.45rem 1rem !important; border-radius: 6px !important; border: 1px solid #0F172A !important; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important; white-space: nowrap !important;">BASE PROCESSADA · MARCO ZERO (MDN-RPP01)</span>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <span class="metric-num" data-target="13">0</span>
+                        <span class="metric-label">Perfis Observados</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-num" data-target="30">0</span>
+                        <span class="metric-label">Arquivos de Origem</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-num" data-target="7468">0</span>
+                        <span class="metric-label">Comentários Preservados</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-num" data-target="3032">0</span>
+                        <span class="metric-label">Registros Consolidados</span>
+                    </div>
+                </div>
+                <p class="metrics-footer">
+                    Os totais apresentados documentam o percurso de processamento e podem ser refinados durante a validação metodológica.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Evidências -->
+        <section id="evidencias" class="section-evidencias">
+            <div class="container evidences-intro">
+                <div class="intro-left">
+                    <span class="section-number">02 / EVIDÊNCIAS</span>
+                    <span class="section-tag">RECORTE EXPLORATÓRIO</span>
+                    <h2 class="section-title">Quando um comentário se repete, ele pode se tornar um <span class="highlight-text-gold">sinal</span>.</h2>
+                </div>
+                <div class="intro-right">
+                    <p class="body-text">
+                        Os exemplos abaixo mostram como recorrências ajudam a abrir perguntas. Eles não representam conclusões definitivas.
                     </p>
                 </div>
             </div>
 
-            <div class="lg:col-span-2 bg-mnGrafiteCard border border-mnBorder p-6 rounded-xl space-y-6 shadow-xl flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-center border-b border-mnBorder pb-4 mb-6">
-                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                            <span>Matriz Única de Evidências (MUE) & LGPD</span>
-                        </h2>
-                        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-3 py-1 rounded-full font-semibold">&check; SHA-256 AUDITADO</span>
+            <!-- Interactive Filters -->
+            <div class="container filters-container">
+                <button class="filter-btn active" data-filter="all">Todos os sinais</button>
+                <button class="filter-btn" data-filter="experiencia">Experiência</button>
+                <button class="filter-btn" data-filter="operacao">Operação</button>
+                <button class="filter-btn" data-filter="territorio">Território</button>
+                <button class="filter-btn" data-filter="musica">Música e Curadoria</button>
+                <button class="filter-btn" data-filter="saude">Saúde e Segurança</button>
+                <button class="filter-btn" data-filter="economia">Economia e Valor</button>
+                <button class="filter-btn" data-filter="sociocultural">Sociocultural</button>
+                <button class="filter-btn" data-filter="bastidores">Trabalho e Bastidores</button>
+                <button class="filter-btn" data-filter="governanca">Governança e Ética</button>
+            </div>
+
+            <!-- Signal Cards Grid -->
+            <div class="container cards-grid">
+                <!-- Card 1: Experiência -->
+                <div class="signal-card" data-category="experiencia">
+                    <div class="card-header">
+                        <span class="card-tag">Experiência</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                        </span>
                     </div>
-
-                    <div class="space-y-5">
-                        <div class="p-4 bg-mnNavyDark border border-mnBorder rounded-lg space-y-2">
-                            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-1">
-                                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Assinatura Digital de Lote:</span>
-                                <span class="text-xs font-mono text-mnYellow bg-black/40 px-2 py-0.5 rounded border border-mnBorder">4df8b65357efba30d690d5ed47b4b392b...</span>
-                            </div>
-                            <p class="text-xs text-slate-400">Garantia de rastreabilidade, imutabilidade e não-reassociação PII conforme diretrizes de governança da ALCATEIA.</p>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Sinais Agregados (Trechos Sintéticos Sanitizados)</h3>
-                            
-                            <div class="p-4 bg-mnNavyDark/60 border-l-4 border-mnYellow rounded-r-lg space-y-1">
-                                <p class="text-xs font-mono text-slate-400">[Fonte Monitorada #04 &bull; Recorte São Paulo]</p>
-                                <p class="text-sm text-slate-200 italic font-medium">"A estrutura de som e a cenografia estavam impecáveis, mas o tempo de espera no acesso comprometeu a chegada."</p>
-                            </div>
-
-                            <div class="p-4 bg-mnNavyDark/60 border-l-4 border-mnYellow rounded-r-lg space-y-1">
-                                <p class="text-xs font-mono text-slate-400">[Fonte Monitorada #18 &bull; Recorte São Paulo]</p>
-                                <p class="text-sm text-slate-200 italic font-medium">"Atendimento ágil no bar e equipe atenciosa na redução de danos fizeram total diferença no evento."</p>
-                            </div>
-                        </div>
+                    <div class="card-content">
+                        <h3>A pista também é memória</h3>
+                        <p>Comentários sobre encontro, pertencimento e encanto revelam como a experiência permanece depois da festa.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">2.850 MENÇÕES</span>
                     </div>
                 </div>
 
-                <div class="p-4 bg-mnNavyDark border border-mnBorder rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-6">
-                    <div>
-                        <p class="text-xs font-bold text-white">Caderno Metodológico Externo</p>
-                        <p class="text-xs text-slate-400">Documentação e registros históricos preservados isoladamente em <code class="text-mnYellow font-mono">docs/</code></p>
+                <!-- Card 2: Operação -->
+                <div class="signal-card" data-category="operacao">
+                    <div class="card-header">
+                        <span class="card-tag">Operação</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </span>
                     </div>
-                    <a href="https://github.com/falecomdiego/alcateia" target="_blank" class="bg-mnYellow hover:bg-yellow-400 text-black text-xs font-bold px-4 py-2 rounded-md transition-colors whitespace-nowrap">
-                        Ver no GitHub
-                    </a>
+                    <div class="card-content">
+                        <h3>A fila muda a leitura da noite</h3>
+                        <p>Tempo de espera, entrada e organização aparecem como sinais recorrentes que afetam a percepção do público.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">3.190 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Território -->
+                <div class="signal-card" data-category="territorio">
+                    <div class="card-header">
+                        <span class="card-tag">Território</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>São Paulo não vive uma noite só</h3>
+                        <p>Deslocamento, acesso e contexto urbano ajudam a explicar experiências diferentes dentro da mesma cena.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">1.428 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Música e Curadoria -->
+                <div class="signal-card" data-category="musica">
+                    <div class="card-header">
+                        <span class="card-tag">Curadoria</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>A identidade sonora como âncora</h3>
+                        <p>Line-ups, gêneros e expectativas musicais guiam as escolhas e a fidelização do público na cena tribal.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">1.105 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 5: Saúde e Segurança -->
+                <div class="signal-card" data-category="saude">
+                    <div class="card-header">
+                        <span class="card-tag">Segurança</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>O cuidado invisível que sustenta a noite</h3>
+                        <p>Menções a redução de danos, acolhimento e segurança apontam a ética do cuidado como prioridade.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">850 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 6: Economia e Valor -->
+                <div class="signal-card" data-category="economia">
+                    <div class="card-header">
+                        <span class="card-tag">Economia</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Precificação e a balança de valor</h3>
+                        <p>Ingressos, consumo no bar e custos logísticos desenham a tensão entre comercialização e acessibilidade.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">940 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 7: Sociocultural -->
+                <div class="signal-card" data-category="sociocultural">
+                    <div class="card-header">
+                        <span class="card-tag">Sociocultural</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>O Pajubá e os códigos da pista</h3>
+                        <p>Manifestações linguísticas, gírias da cena e rituais coletivos mostram como a pista constrói identidade e capital simbólico.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">785 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 8: Trabalho e Bastidores -->
+                <div class="signal-card" data-category="bastidores">
+                    <div class="card-header">
+                        <span class="card-tag">Bastidores</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Quem faz a noite acontecer</h3>
+                        <p>Comentários sobre staff, promoters, DJs e a equipe de apoio evidenciam a importância das relações de trabalho nos bastidores.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">620 OCORRÊNCIAS</span>
+                    </div>
+                </div>
+
+                <!-- Card 9: Governança e Ética -->
+                <div class="signal-card" data-category="governanca">
+                    <div class="card-header">
+                        <span class="card-tag">Governança</span>
+                        <span class="card-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Ética, proteção e limites</h3>
+                        <p>Menções a consentimento, privacidade e responsabilidade jurídica mostram a busca ativa por segurança e conformidade na pista.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge-count">410 OCORRÊNCIAS</span>
+                    </div>
                 </div>
             </div>
 
-        </div>
+            <!-- Sentiment Chart Component -->
+            <div class="container sentiment-wrapper">
+                <div class="sentiment-box">
+                    <div class="sentiment-info">
+                        <span class="chart-tag" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">CONSOLIDAÇÃO DE SENTIMENTOS</span>
+                        <h3>O tom da conversa também deixa pistas.</h3>
+                        <p>No universo de 7.468 comentários da rodada MDN-RPP01, a classificação quantitativa revela o equilíbrio exato das percepções fáticas de comportamento urbano.</p>
+                    </div>
+                    <div class="sentiment-chart">
+                        <!-- Positive -->
+                        <div class="chart-row">
+                            <div class="row-label">
+                                <span>Positivos</span>
+                                <span class="row-value">2.850</span>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill positive" data-value="2850" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Neutral -->
+                        <div class="chart-row">
+                            <div class="row-label">
+                                <span>Neutros</span>
+                                <span class="row-value">3.190</span>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill neutral" data-value="3190" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Negative -->
+                        <div class="chart-row">
+                            <div class="row-label">
+                                <span>Negativos</span>
+                                <span class="row-value">1.428</span>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-fill negative" data-value="1428" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Section 3: Método -->
+        <section id="metodo" class="section-metodo">
+            <div class="container grid-2">
+                <div class="metodo-title-area">
+                    <span class="section-number">03 / MÉTODO</span>
+                    <h2 class="section-title">Da conversa dispersa à evidência que pode ser regra ou sinal.</h2>
+                </div>
+                <div class="metodo-desc-area">
+                    <p class="body-text">
+                        Cada etapa preserva a ligação entre origem, tratamento e interpretação. Assim, a leitura final não depende de uma impressão isolada.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Methodology Steps Grid -->
+            <div class="container steps-grid">
+                <!-- Step 01 -->
+                <div class="step-card">
+                    <div class="step-line-decorator"></div>
+                    <div class="step-num-bubble">01</div>
+                    <div class="step-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <h3>Escutar</h3>
+                    <p>Comentários públicos são reunidos como sinais espontâneos da experiência coletiva.</p>
+                </div>
+
+                <!-- Step 02 -->
+                <div class="step-card">
+                    <div class="step-line-decorator"></div>
+                    <div class="step-num-bubble">02</div>
+                    <div class="step-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+                    </div>
+                    <h3>Organizar</h3>
+                    <p>Registros passam por limpeza, padronização e proteção de informações identificáveis.</p>
+                </div>
+
+                <!-- Step 03 -->
+                <div class="step-card">
+                    <div class="step-line-decorator"></div>
+                    <div class="step-num-bubble">03</div>
+                    <div class="step-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Interpretar</h3>
+                    <p>Recorrências são classificadas por temas para separar episódios isolados de padrões coletivos.</p>
+                </div>
+
+                <!-- Step 04 -->
+                <div class="step-card">
+                    <div class="step-num-bubble">04</div>
+                    <div class="step-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h3>Devolver</h3>
+                    <p>Os achados retornam à cena em leituras claras, rastreáveis e abertas ao aprofundamento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Princípios -->
+        <section id="principios" class="section-principios">
+            <div class="container grid-2 grid-principios">
+                <div class="principios-visual">
+                    <div class="coordinates-grid">
+                        <div class="coords-line x-line"></div>
+                        <div class="coords-line y-line"></div>
+                        <span class="coord-label top-left">23°33'S</span>
+                        <span class="coord-label bottom-right">46°38'W</span>
+                        <!-- Custom styled target grid or orbits -->
+                        <div class="orbit-radar-decorator">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                            <div class="center-core"></div>
+                            <div class="pulse-ring"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="principios-content">
+                    <span class="section-number">04 / PRINCÍPIOS</span>
+                    <h2 class="section-title">Ver o coletivo sem expor o indivíduo.</h2>
+                    <p class="lead-text">
+                        A força do mapa está na qualidade do percurso — e nos limites que ele respeita.
+                    </p>
+
+                    <div class="principles-list">
+                        <div class="principle-item">
+                            <div class="principle-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </div>
+                            <div class="principle-text">
+                                <h3>Privacidade</h3>
+                                <p>Identidades não são o objeto da análise.</p>
+                            </div>
+                        </div>
+
+                        <div class="principle-item">
+                            <div class="principle-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            </div>
+                            <div class="principle-text">
+                                <h3>Rastreabilidade</h3>
+                                <p>Resultados podem ser conferidos e revisitados.</p>
+                            </div>
+                        </div>
+
+                        <div class="principle-item">
+                            <div class="principle-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                            </div>
+                            <div class="principle-text">
+                                <h3>Contexto</h3>
+                                <p>Números são interpretados dentro da cultura da cena.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Avaliação & Acesso -->
+        <section id="avaliacao" class="section-avaliacao">
+            <div class="container">
+                <div class="avaliacao-header">
+                    <span class="section-number">05 / ACESSO & TESTE</span>
+                    <h2 class="section-title">Validação metodológica em ambiente seguro.</h2>
+                    <p class="body-text" style="max-width: 700px; margin-bottom: 3rem;">
+                        O Mapa da Noite foi projetado para avaliação acadêmica, técnica e institucional. Avaliadores podem inspecionar a infraestrutura sem necessidade de processar bases locais.
+                    </p>
+                </div>
+
+                <div class="avaliacao-grid">
+                    <!-- Ambiente de Testes -->
+                    <div class="avaliacao-card destaque">
+                        <div class="card-icon-large">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>
+                        <h3>Ambiente de Testes</h3>
+                        <p>Inspecione o painel analítico da ALCATEIA (Dashboard de Auditoria) com o polimorfismo reativo completo, sem precisar instalar nada.</p>
+                        <a href="http://localhost:8888" target="_blank" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; text-align: center;">
+                            Acessar Dashboard de Auditoria
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+
+                    <!-- Plataformas Suportadas -->
+                    <div class="avaliacao-card">
+                        <div class="card-icon-small">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        </div>
+                        <h3>Plataformas Suportadas</h3>
+                        <ul class="avaliacao-list">
+                            <li><strong>Navegadores:</strong> Chrome, Edge, Firefox, Safari (Modernos)</li>
+                            <li><strong>Dispositivos:</strong> Responsivo para Desktop (1920p) e Mobile</li>
+                            <li><strong>Acessibilidade:</strong> Suporte a leitores de tela e contraste WCAG AAA</li>
+                        </ul>
+                    </div>
+
+                    <!-- Instruções de Instalação -->
+                    <div class="avaliacao-card">
+                        <div class="card-icon-small">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </div>
+                        <h3>Instalação Local (Opicional)</h3>
+                        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1rem;">Para desenvolvimento ou replicação da infraestrutura de ponta a ponta:</p>
+                        <div class="code-snippet">
+                            <code>git clone https://github.com/alcateia/mapa-da-noite.git</code>
+                            <code>cd mapa-da-noite</code>
+                            <code>python -m http.server 9090</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Banner -->
+        <section class="quote-banner-section">
+            <div class="container quote-container">
+                <span class="quote-tag">A NOITE COMO FONTE DE CONHECIMENTO</span>
+                <blockquote class="quote-text">
+                    “O mapa não fala por cada pessoa. Ele mostra o que começa a aparecer quando muitas vozes são lidas em conjunto.”
+                </blockquote>
+                <button id="scrollTopBtn" class="btn btn-secondary">
+                    Voltar ao início
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+                </button>
+            </div>
+        </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="max-w-7xl mx-auto w-full bg-mnNavyCard/60 border border-mnBorder rounded-xl p-6 mt-12 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 gap-4">
-        <p>&copy; 2026 Mapa da Noite — Plataforma de Inteligência Territorial da Vida Noturna.</p>
-        <p class="font-mono">Google Sans &bull; Amarelo Assinatura &bull; São Paulo (SP)</p>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="12" r="6" stroke="var(--color-primary)" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="12" r="2" fill="var(--color-primary)"/>
+                    </svg>
+                    <span class="logo-text">Mapa da <span>Noite</span></span>
+                </div>
+                <p>Inteligência coletiva aplicada à vida noturna de São Paulo.</p>
+            </div>
+            <div class="footer-meta">
+                <span>Recorte inicial · 2026</span>
+            </div>
+        </div>
     </footer>
 
+    <!-- Floating SoundCloud Player -->
+    <div class="soundcloud-floating">
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/d13g0s1lv4/sets/glow-pride&color=%23f1c40f&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+    </div>
+
+    <!-- Accessibility Floating Trigger Button -->
+    <button class="accessibility-trigger" id="accTriggerBtn" title="Ferramentas de Acessibilidade / Accessibility Tools" aria-label="Ferramentas de Acessibilidade">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+            <path d="M12 7v6M9 9h6M10 16h4"/>
+        </svg>
+    </button>
+
+    <!-- Accessibility Sidebar Panel -->
+    <div class="accessibility-sidebar" id="accSidebar">
+        <div class="accessibility-sidebar-header">
+            <h2 data-i18n="acc-title">Acessibilidade</h2>
+            <button class="accessibility-close-btn" id="accCloseBtn" title="Fechar / Close">×</button>
+        </div>
+        <div class="accessibility-sidebar-content">
+            <!-- Text Size -->
+            <div class="accessibility-tool-group">
+                <h3 data-i18n="acc-font-size">Tamanho do Texto</h3>
+                <div class="accessibility-btn-row">
+                    <button class="accessibility-btn-small" id="btnFontDec" title="Diminuir Fonte / Decrease Font">A-</button>
+                    <button class="accessibility-btn-small active" id="btnFontReset" title="Fonte Padrão / Reset Font">A</button>
+                    <button class="accessibility-btn-small" id="btnFontInc" title="Aumentar Fonte / Increase Font">A+</button>
+                </div>
+            </div>
+
+            <!-- Contrast Toggle -->
+            <div class="accessibility-tool-group">
+                <h3 data-i18n="acc-contrast">Contraste</h3>
+                <button class="accessibility-btn" id="btnContrastToggle">
+                    <span data-i18n="acc-high-contrast">Alto Contraste</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 18V6a6 6 0 0 1 0 12z"/></svg>
+                </button>
+            </div>
+
+            <!-- Line Spacing -->
+            <div class="accessibility-tool-group">
+                <h3 data-i18n="acc-spacing">Espaçamento</h3>
+                <button class="accessibility-btn" id="btnSpacingToggle">
+                    <span data-i18n="acc-generous-spacing">Espaçamento Ampliado</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/></svg>
+                </button>
+            </div>
+
+            <!-- Underline Links -->
+            <div class="accessibility-tool-group">
+                <h3 data-i18n="acc-links">Links</h3>
+                <button class="accessibility-btn" id="btnLinksToggle">
+                    <span data-i18n="acc-underline-links">Sublinhar Links</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </button>
+            </div>
+
+            <!-- Dyslexia Font Toggle -->
+            <div class="accessibility-tool-group">
+                <h3 data-i18n="acc-dyslexia">Legibilidade</h3>
+                <button class="accessibility-btn" id="btnDyslexiaToggle">
+                    <span data-i18n="acc-dyslexia-font">Fonte p/ Dislexia</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3a1 1 0 0 1 1-1h13a1 1 0 0 1 1 1v14.5a2.5 2.5 0 0 0-2.5-2.5H6.5a2.5 2.5 0 0 0-2.5 2.5z"/></svg>
+                </button>
+            </div>
+
+            <!-- Reset Adjustments -->
+            <div class="accessibility-tool-group" style="margin-top: 1rem;">
+                <button class="accessibility-btn" id="btnAccReset" style="border-color: rgba(239, 68, 68, 0.3); color: #ef4444; justify-content: center; background: rgba(239, 68, 68, 0.02);">
+                    <span data-i18n="acc-reset-all">Resetar Ajustes</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Backdrop Overlay -->
+    <div class="accessibility-overlay" id="accOverlay"></div>
+
+    <!-- Interactive Logic Script -->
+    <script src="index.js"></script>
 </body>
 </html>

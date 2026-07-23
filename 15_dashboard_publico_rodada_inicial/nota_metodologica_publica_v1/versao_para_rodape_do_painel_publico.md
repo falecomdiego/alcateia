@@ -1,0 +1,1 @@
+O painel organiza comentários públicos em sinais agregados de percepção. Menção não é avaliação automática; recorrência não é acusação. A leitura não atribui causa pública, preserva anonimização e cuidado de exposição, e não funciona como laudo, denúncia ou ranking.
