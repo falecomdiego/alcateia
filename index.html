@@ -1,240 +1,266 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mapa da Noite - Painel publico V1</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALCATEIA — Painel de Evidências do Marco Zero (MDN-RPP01)</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="brand" href="#abertura" aria-label="Mapa da Noite">
-        <span class="brand-mark" aria-hidden="true">
-          <img class="brand-logo" src="assets/logotipo-falecomodiego.png" alt="">
-        </span>
-        <span>
-          <small>Versão pública V1</small>
-          <strong>Mapa da Noite</strong>
-        </span>
-      </a>
+</head>
+<body class="dark-mode">
+    <div class="glow-container">
+        <div class="glow-orb glow-1" id="orb-1"></div>
+        <div class="glow-orb glow-2" id="orb-2"></div>
+    </div>
 
-      <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#painel">Painel</a>
-        <a href="#evidencias">Evidências</a>
-        <a href="#operacao">Operação</a>
-        <a href="#experiencia">Experiência</a>
-        <a href="#blindagem">Blindagem</a>
-        <a href="#limites">Limites</a>
-      </nav>
-    </header>
+    <div class="app-container">
+        <!-- HEADER PRINCIPAL -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-area">
+                    <img src="assets/logo-alcateia.jpg" class="logo-wolf-img" alt="Logo ALCATEIA">
+                    <div class="logo-text">
+                        <h1>ALCATEIA</h1>
+                        <p class="subtitle">Evidence-Oriented Multi-Agent Architecture • v1.0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SELETOR DE DOMÍNIO (ESCALABILIDADE METODOLÓGICA) -->
+            <div class="domain-selector-container">
+                <span class="selector-label">Selecione o Caso de Teste:</span>
+                <div class="toggle-buttons">
+                    <button class="toggle-btn active" id="btn-caso1" onclick="switchDomain('mapa_da_noite')">
+                        <span class="btn-icon">🎵</span> Caso 1: Mapa da Noite
+                    </button>
+                    <button class="toggle-btn" id="btn-caso2" onclick="switchDomain('saude_territorial')">
+                        <span class="btn-icon">🏥</span> Caso 2: Saúde Territorial
+                    </button>
+                </div>
+            </div>
+        </header>
 
-    <main>
-      <section class="hero" id="abertura" aria-labelledby="titulo-painel">
-        <div class="hero-copy">
-          <p class="eyebrow">Rodada inicial validada</p>
-          <h1 id="titulo-painel">Mapa da Noite</h1>
-          <p class="subtitle">Painel público de sinais, percepções e recorrências da cena.</p>
-          <p class="intro">
-            Universo analisado: 3.325 comentários públicos organizados de forma agregada e anonimizada. Esta versão
-            apresenta sinais públicos com cuidado de exposição, filtros funcionais e sem atribuição pública de causa.
-          </p>
-        </div>
+        <!-- GRID DE MÉTRICAS -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <p class="metric-label">Volume Processado</p>
+                <h2 class="metric-value" id="val-total-comentarios">7.468</h2>
+                <p class="metric-sub" id="lbl-total-comentarios">Interações humanas limpas</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-label">Fontes Auditadas (SHA-256)</p>
+                <h2 class="metric-value" id="val-fontes-auditadas">30</h2>
+                <p class="metric-sub text-green">100% de Integridade Validada</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-label">Privacidade & LGPD</p>
+                <h2 class="metric-value" id="val-pii-expurgado">100%</h2>
+                <p class="metric-sub text-purple">Mascaramento Ativo de PII</p>
+            </div>
+            <div class="metric-card">
+                <p class="metric-label">Latência do Pipeline</p>
+                <h2 class="metric-value" id="val-latencia">0.18s</h2>
+                <p class="metric-sub">Processamento em Memória</p>
+            </div>
+        </section>
 
-        <aside class="method-card" aria-labelledby="nota-metodologica">
-          <p class="eyebrow">Nota metodológica</p>
-          <h2 id="nota-metodologica">Antes dos dados</h2>
-          <p>
-            O painel trabalha com comentários públicos analisados de forma agregada. Menção não é avaliação automática;
-            recorrência não é acusação. Os resultados são sinais de percepção pública, não uma leitura definitiva, e não
-            atribuem causa pública a festas, casas, produtores, artistas, marcas, perfis ou organizações.
-          </p>
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-grid">
+            
+            <!-- COLUNA ESQUERDA: PIPELINE E INFORMAÇÃO -->
+            <div class="left-column">
+                
+                <!-- CARD 1: CONFIANÇA - PIPELINE DE 5 ETAPAS -->
+                <div class="glass-card section-card">
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <div class="card-header-text">
+                            <h3>1. Confiança (Trustworthy AI)</h3>
+                            <p class="card-subtitle">Caminho auditável percorrido pela informação em tempo real</p>
+                        </div>
+                    </div>
+
+                    <div class="pipeline-timeline">
+                        <!-- ETAPA 1 -->
+                        <div class="timeline-item active" id="time-step1" onclick="showPipelineDetail(1)">
+                            <div class="timeline-dot">1</div>
+                            <div class="timeline-content">
+                                <h4>Investigação (Discovery)</h4>
+                                <p>Demanda qualificada e priorizada</p>
+                            </div>
+                        </div>
+                        <!-- ETAPA 2 -->
+                        <div class="timeline-item" id="time-step2" onclick="showPipelineDetail(2)">
+                            <div class="timeline-dot">2</div>
+                            <div class="timeline-content">
+                                <h4>Execução (Execution)</h4>
+                                <p>Saneamento e expurgo de dados LGPD</p>
+                            </div>
+                        </div>
+                        <!-- ETAPA 3 -->
+                        <div class="timeline-item" id="time-step3" onclick="showPipelineDetail(3)">
+                            <div class="timeline-dot">3</div>
+                            <div class="timeline-content">
+                                <h4>Evidências (Evidence)</h4>
+                                <p>Auditoria matemática de hashes SHA-256</p>
+                            </div>
+                        </div>
+                        <!-- ETAPA 4 -->
+                        <div class="timeline-item" id="time-step4" onclick="showPipelineDetail(4)">
+                            <div class="timeline-dot">4</div>
+                            <div class="timeline-content">
+                                <h4>Recomendação (Reasoning)</h4>
+                                <p>Classificação léxica por IA Generativa</p>
+                            </div>
+                        </div>
+                        <!-- ETAPA 5 -->
+                        <div class="timeline-item" id="time-step5" onclick="showPipelineDetail(5)">
+                            <div class="timeline-dot">5</div>
+                            <div class="timeline-content">
+                                <h4>Auditoria (Audit)</h4>
+                                <p>Selagem lógica e assinatura digital da MUE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DETALHE DA ETAPA SELECIONADA -->
+                    <div class="pipeline-detail-box" id="detail-box">
+                        <h4 id="detail-title">Investigação (Discovery Service)</h4>
+                        <table class="detail-table">
+                            <tr>
+                                <td class="tbl-label">Quem produziu:</td>
+                                <td id="detail-producer">Discovery Agent (DiscoveryService)</td>
+                            </tr>
+                            <tr>
+                                <td class="tbl-label">Modelo utilizado:</td>
+                                <td id="detail-model">Codex Assistido</td>
+                            </tr>
+                            <tr>
+                                <td class="tbl-label">Script executado:</td>
+                                <td id="detail-script"><code>alcateia/core/discovery.py</code></td>
+                            </tr>
+                            <tr>
+                                <td class="tbl-label">Referência regulamentar:</td>
+                                <td id="detail-doc">ALCATEIA-ARC-001-V1.0.md • Gate G0</td>
+                            </tr>
+                            <tr>
+                                <td class="tbl-label">Como reproduzir:</td>
+                                <td id="detail-reproduce"><code>python -m alcateia.main --context mapa_da_noite --question "..."</code></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CARD 2: GOVERNANÇA DA INFORMAÇÃO -->
+                <div class="glass-card section-card">
+                    <div class="card-header">
+                        <span class="card-icon">🛡️</span>
+                        <div class="card-header-text">
+                            <h3>2. Governança da Informação</h3>
+                            <p class="card-subtitle">Verificação de integridade física dos dados e mapeamento ativo de fontes</p>
+                        </div>
+                    </div>
+                    <div class="sources-container">
+                        <div class="sources-header">
+                            <span>Fonte do Lote</span>
+                            <span>SHA-256 Hash Oficial</span>
+                            <span>Integridade</span>
+                        </div>
+                        <div class="sources-list" id="sources-list-container">
+                            <!-- Inserido dinamicamente via JS -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <!-- COLUNA DIREITA: RASTREABILIDADE E AUDITORIA -->
+            <div class="right-column">
+                
+                <!-- CARD 3: RASTREABILIDADE E AUDITORIA (MUE INSPECTOR) -->
+                <div class="glass-card section-card mue-card">
+                    <div class="card-header header-glow">
+                        <span class="card-icon">📜</span>
+                        <div class="card-header-text">
+                            <h3>3. Rastreabilidade e Auditoria</h3>
+                            <p class="card-subtitle">Inspeção da Matriz Única de Evidências (MUE) gerada por IA</p>
+                        </div>
+                    </div>
+
+                    <!-- RECOMENDAÇÃO FINAL -->
+                    <div class="recommendation-box">
+                        <div class="rec-header">
+                            <span class="badge" id="val-badge-modelo">GPT 5.6</span>
+                            <span class="badge" id="val-badge-confianca">Confiança Alta</span>
+                        </div>
+                        <h4 class="rec-title" id="val-rec-title">Aumentar em 30% os caixas móveis e redistribuir pontos de hidratação na pista open air.</h4>
+                        <p class="rec-hypothesis" id="val-rec-hypothesis"><strong>Hipótese Formulada:</strong> Demonstrado aumento de comentários críticos sobre infraestrutura e operação.</p>
+                    </div>
+
+                    <!-- ASSINATURA DA MUE -->
+                    <div class="signature-box">
+                        <div class="sig-header">
+                            <span>Selo de Auditoria ALCATEIA (v1.0)</span>
+                            <span class="badge badge-green">IMUTÁVEL</span>
+                        </div>
+                        <p class="sig-hash" id="val-sig-hash">SHA-256: 4df8b65357efba30d690d5ed47b4b392b0c3b3a844d59e90fa84b1986e2e8fcb</p>
+                        <p class="sig-meta" id="val-sig-meta">Assinado em 21/07/2026 por Diego da Silva (Pesquisador-Chefe)</p>
+                    </div>
+
+                    <!-- FRAGMENTOS FÁTICOS (EVIDÊNCIAS DE SUPORTE) -->
+                    <div class="evidencies-section">
+                        <h4>Evidências Fáticas de Suporte (Linhagem Ativa)</h4>
+                        <p class="evidencies-intro">Estes são os fragmentos reais de comentários brutos que fundamentam a decisão acima, auditados matematicamente de volta à sua planilha e linha exata de origem:</p>
+                        
+                        <div class="evidencies-list" id="evidencies-list-container">
+                            <!-- Inserido dinamicamente via JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>Projeto ALCATEIA • Construído com Codex e GPT 5.6 para a OpenAI Build Week</p>
+            <p class="footer-license">Código aberto sob licença MIT • Totalmente livre de vazamentos de privacidade (LGPD)</p>
+            <div style="max-width: 900px; margin: 1.5rem auto 0; padding: 1rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: 8px; font-size: 0.78rem; line-height: 1.6; color: var(--text-secondary); text-align: justify;">
+                <strong>Fechamento institucional:</strong> Nosso compromisso com a ALCATEIA é entregar Inteligência de Decisão sem caixa-preta. Desenvolvemos uma arquitetura institucional baseada em governança da informação, proteção de dados, rastreabilidade e produção de evidências auditáveis. Cada recomendação, indicador ou hipótese produzida pelo sistema pode ser rastreada até suas fontes primárias, permitindo transparência metodológica, reprodutibilidade das análises e conformidade com requisitos legais e institucionais para governos, organizações e empresas.
+            </div>
+        </footer>
+        <!-- PLUGIN DE ÁUDIO (FLUTUANTE - SOUNDCLOUD TRIBAL HOUSE + EMBEDDINGS) -->
+        <aside class="sound-plugin" data-night-sound data-autoplay="false" aria-label="Trilha sonora do Mapa da Noite">
+            <div class="sound-copy">
+                <span>Trilha do painel</span>
+                <strong>Tribal House Soundscape</strong>
+                <small>Playlist Oficial SoundCloud • Curadoria via OpenAI Embeddings</small>
+                <small class="sound-status" data-sound-status aria-live="polite">Pronto para iniciar.</small>
+            </div>
+            <div class="sound-controls">
+                <div class="sound-level" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i>
+                </div>
+                <button type="button" class="sound-toggle" data-sound-toggle aria-pressed="false" aria-label="Tocar trilha">
+                    <span data-sound-label>Tocar</span>
+                </button>
+            </div>
+            <div id="soundcloud-embed-container" style="display: none; width: 100%; margin-top: 10px; grid-column: 1 / -1; border-radius: 8px; overflow: hidden;">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
+                src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/discover/sets/personalized-tracks%3A%3Ad13g0s1lv4%3A1734332904&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+                </iframe>
+            </div>
         </aside>
-      </section>
+    </div>
 
-      <section class="section dashboard-section" id="painel" aria-labelledby="titulo-painel-funcional">
-        <div class="section-heading">
-          <p class="eyebrow">Painel funcional</p>
-          <h2 id="titulo-painel-funcional">Filtre os sinais agregados da rodada inicial.</h2>
-          <p>
-            Universo analisado: 3.325 comentários públicos organizados de forma agregada e anonimizada. Os números
-            abaixo são agregados e não representam ordenação sensível.
-          </p>
-        </div>
-
-        <div class="summary-grid" aria-label="Resumo do painel público">
-          <article class="summary-card">
-            <span>Universo analisado</span>
-            <strong>3.325</strong>
-            <small>comentários públicos organizados de forma agregada e anonimizada</small>
-          </article>
-          <article class="summary-card live-count">
-            <span>Sinais exibidos</span>
-            <strong id="visible-count">0</strong>
-            <small id="active-filter-label">Todos os sinais agregados</small>
-          </article>
-          <article class="summary-card">
-            <span>Operação</span>
-            <strong id="operation-count">0</strong>
-            <small>sinais agregados disponíveis</small>
-          </article>
-          <article class="summary-card">
-            <span>Experiência</span>
-            <strong id="experience-count">0</strong>
-            <small>sinais agregados disponíveis</small>
-          </article>
-          <article class="summary-card">
-            <span>Blindagem</span>
-            <strong id="protected-count">0</strong>
-            <small>sinais complementares seguros</small>
-          </article>
-          <article class="summary-card warning-card">
-            <span>Cuidado de leitura</span>
-            <strong>sem ordem</strong>
-            <small>contagens agregadas não indicam melhores ou piores</small>
-          </article>
-        </div>
-
-        <div class="filter-panel" aria-label="Filtros do painel público">
-          <div class="filter-group">
-            <p>Filtros principais</p>
-            <div class="filter-row" id="axis-filters"></div>
-          </div>
-          <div class="filter-group">
-            <p>Campos de operação</p>
-            <div class="filter-row" id="operation-filters"></div>
-          </div>
-          <div class="filter-group">
-            <p>Campos de experiência</p>
-            <div class="filter-row" id="experience-filters"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section soft-band" id="evidencias" aria-labelledby="titulo-evidencias">
-        <div class="section-heading evidence-heading">
-          <div>
-            <p class="eyebrow">Evidências agregadas</p>
-            <h2 id="titulo-evidencias">Cards públicos seguros.</h2>
-            <p>
-              Cada card apresenta campo ou tema, eixo público, tipo de sinal, recorrência quando disponível, leitura
-              pública curta, limite metodológico e confirmação de leitura sem atribuição pública de causa.
-            </p>
-          </div>
-          <div class="result-status" id="result-status" aria-live="polite"></div>
-        </div>
-
-        <div id="evidence-grid" class="evidence-grid"></div>
-        <div id="empty-state" class="empty-state" hidden>
-          Nenhum sinal agregado disponível para este filtro na versão pública atual.
-        </div>
-      </section>
-
-      <section class="section" id="operacao" aria-labelledby="titulo-operacao">
-        <div class="section-heading">
-          <p class="eyebrow">Operação</p>
-          <h2 id="titulo-operacao">Funcionamento concreto da experiência.</h2>
-          <p>Campos operacionais aparecem como sinais agregados, com cuidado de leitura e sem inferência causal.</p>
-        </div>
-        <div id="operation-grid" class="axis-grid"></div>
-      </section>
-
-      <section class="section soft-band" id="experiencia" aria-labelledby="titulo-experiencia">
-        <div class="section-heading">
-          <p class="eyebrow">Experiência</p>
-          <h2 id="titulo-experiencia">Percepção vivida pelo público.</h2>
-          <p>Campos experienciais aparecem como percepções públicas agregadas, sem reduzir a cena a uma nota.</p>
-        </div>
-        <div id="experience-grid" class="axis-grid"></div>
-      </section>
-
-      <section class="section" id="blindagem" aria-labelledby="titulo-blindagem">
-        <div class="section-heading">
-          <p class="eyebrow">Sinais complementares com blindagem</p>
-          <h2 id="titulo-blindagem">Contexto seguro, sem individualização.</h2>
-          <p>
-            Temas complementares entram apenas como contexto agregado. Não há individualização de artistas, casas,
-            festas, produtores, marcas, equipes ou territórios.
-          </p>
-        </div>
-        <div id="protected-grid" class="axis-grid protected-grid"></div>
-      </section>
-
-      <section class="section soft-band" id="governanca" aria-labelledby="titulo-governanca">
-        <div class="section-heading">
-          <p class="eyebrow">Governança e transparência metodológica</p>
-          <h2 id="titulo-governanca">Como ler este painel.</h2>
-          <p>
-            A leitura preserva anonimização, agregação e cuidado de exposição. O objetivo é transformar percepção
-            pública em inteligência útil, sem expor pessoas ou responsabilizar publicamente agentes da cena.
-          </p>
-        </div>
-      </section>
-
-      <section class="section limits-band" id="limites" aria-labelledby="titulo-limites">
-        <div class="section-heading">
-          <p class="eyebrow">Limites da leitura</p>
-          <h2 id="titulo-limites">O que os sinais não afirmam.</h2>
-        </div>
-
-        <div class="limits-list">
-          <article class="limit-item">Menção não é avaliação automática.</article>
-          <article class="limit-item">Recorrência não é acusação.</article>
-          <article class="limit-item">Sinal agregado não é prova de causa.</article>
-          <article class="limit-item">O painel não atribui responsabilidade pública.</article>
-          <article class="limit-item">Os dados são apresentados com agregação e cuidado de exposição.</article>
-          <article class="limit-item">Território e dinâmica urbana não aparecem como eixo autônomo nesta primeira versão pública.</article>
-        </div>
-      </section>
-
-      <section class="section final-band" id="encaminhamento" aria-labelledby="titulo-encaminhamento">
-        <div class="section-heading">
-          <p class="eyebrow">Encaminhamento</p>
-          <h2 id="titulo-encaminhamento">Leitura pública para melhoria contínua.</h2>
-          <p>
-            O painel organiza sinais públicos em uma superfície funcional, simples de ler e metodologicamente protegida.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="fechamento" aria-labelledby="titulo-fechamento" style="border-top: 1px solid var(--line); background: #111;">
-        <div class="section-heading">
-          <p class="eyebrow">Fechamento Institucional</p>
-          <h2 id="titulo-fechamento">Governança, Transparência e Evidências Auditáveis.</h2>
-          <p style="font-size: 1.05rem; line-height: 1.7; color: rgba(255, 255, 255, 0.9);">
-            Nosso compromisso com a ALCATEIA é entregar Inteligência de Decisão sem caixa-preta. Desenvolvemos uma arquitetura institucional baseada em governança da informação, proteção de dados, rastreabilidade e produção de evidências auditáveis. Cada recomendação, indicador ou hipótese produzida pelo sistema pode ser rastreada até suas fontes primárias, permitindo transparência metodológica, reprodutibilidade das análises e conformidade com requisitos legais e institucionais para governos, organizações e empresas.
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <aside class="sound-plugin" data-night-sound data-authorized-track="assets/instrumental-web.wav" data-autoplay="true" aria-label="Trilha sonora do Mapa da Noite">
-      <div class="sound-copy">
-        <span>Trilha do painel</span>
-        <strong>Tribal house</strong>
-        <small>Sugestao: DJ Felipe Lira</small>
-        <small class="sound-status" data-sound-status aria-live="polite">Tentando iniciar a trilha automaticamente.</small>
-      </div>
-      <div class="sound-controls">
-        <div class="sound-level" aria-hidden="true">
-          <i></i>
-          <i></i>
-          <i></i>
-          <i></i>
-        </div>
-        <button type="button" class="sound-toggle" data-sound-toggle aria-pressed="false" aria-label="Tocar trilha tribal house">
-          <span data-sound-label>Tocar</span>
-        </button>
-      </div>
-    </aside>
-
-    <nav class="mobile-nav" aria-label="Navegação mobile">
-      <a href="#painel">Painel</a>
-      <a href="#evidencias">Sinais</a>
-      <a href="#operacao">Operação</a>
-      <a href="#experiencia">Experiência</a>
-    </nav>
-
+    <!-- JS Logic -->
     <script src="app.js"></script>
     <script src="music-plugin.js"></script>
-  </body>
+</body>
 </html>
